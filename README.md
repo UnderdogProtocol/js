@@ -13,8 +13,7 @@ yarn add @underdog-protocol/js
 ```ts
 // pages/api/underdog/[...underdog].ts
 
-import NextUnderdog from "@underdog-protocol/js";
-import { NetworkEnum } from "@underdog-protocol/types";
+import { NextUnderdog, NetworkEnum } from "@underdog-protocol/js";
 
 export default NextUnderdog({
   apiKey: process.env.UNDERDOG_API_KEY,
