@@ -278,10 +278,10 @@
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.3.tgz#cef09e3ec9af1d63d2a6cc5b383a737e24e6dcf5"
   integrity sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==
 
-"@underdog-protocol/types@^0.2.6":
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/@underdog-protocol/types/-/types-0.2.6.tgz#95c932b032d58882edc3296727ab8dfdeee917e2"
-  integrity sha512-9lMafNdp6Py2AoF9t7G3jIEPmp5SaplLSPniRHdVx9odaNjn1MVKcfCyuNfAp+kNt2G7ulGuMh8C/vjKUzTsDQ==
+"@underdog-protocol/types@^0.2.7":
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/@underdog-protocol/types/-/types-0.2.7.tgz#11bfa49ee26412bd2ba19c75d9f7bf434f73ef65"
+  integrity sha512-7B2tOvgT5diayvRJs55eP8LQ5fWiV/TlYW3YbpjfRqpocLT+uj4i0dDYwXu3Q1cQ+OTlwWDbGcPP57NNOmoCIQ==
   dependencies:
     "@asteasolutions/zod-to-openapi" "^4.6.0"
     zod "^3.21.4"
