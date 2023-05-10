@@ -127,11 +127,11 @@ export const useSearchNfts = (request: types.SearchNftsRequest) => {
 
 export const useTransaction = (
   request: types.GetTransactionRequest, 
-  options?: { refetchInterval: UseQueryOptions<types.GetTransactionResponse, AxiosError>["refetchInterval"] }
+  options?: { refetchInterval: UseQueryOptions<types.GetTransactionResponse | undefined, AxiosError>["refetchInterval"] }
 ) => {
-  const { data, refetch, isLoading, error } = useQuery<types.GetTransactionResponse, AxiosError>(
+  const { data, refetch, isLoading, error } = useQuery<types.GetTransactionResponse | undefined, AxiosError>(
     ["transaction", request],
-    () => underdogClient.getTransaction(request),
+    () => request.params.transactionId ? underdogClient.getTransaction(request) : undefined,
     { retry: false, ...options }
   );
 

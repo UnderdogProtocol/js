@@ -1,5 +1,5 @@
 import { networkToUnderdogApiEndpoints, NetworkEnum } from "@underdog-protocol/types";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import path from "path";
 
@@ -21,14 +21,20 @@ const NextUnderdogApiHandler = async (
     query as Record<string, string>
   ).toString()}`;
 
-  const response = await axios({
-    method: req.method,
-    url,
-    headers: { Authorization: bearer ? `Bearer ${apiKey}` : apiKey },
-    data: req.body,
-  });
+  try {
+    const response = await axios({
+      method: req.method,
+      url,
+      headers: { Authorization: bearer ? `Bearer ${apiKey}` : apiKey },
+      data: req.body,
+    });
 
-  res.status(response.status).json(response.data);
+    res.status(response.status).json(response.data);
+  } catch (e) {
+    if (axios.isAxiosError(e)) {
+      res.status(400).json({ error: e.message });
+    }
+  }
 };
 
 export function NextUnderdog(options: UnderdogOptions) {
