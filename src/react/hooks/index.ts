@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { QueryObserverOptions, UseQueryOptions, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useEffect } from "react";
 
@@ -7,6 +7,8 @@ import * as types from "@underdog-protocol/types";
 import { createUnderdogClient } from "../../lib";
 
 const underdogClient = createUnderdogClient({});
+
+type Options = Omit<UseQueryOptions, 'queryKey' | 'queryFn' | 'initialData'> & { initialData?: () => undefined } 
 
 export const useNft = (request: types.GetNftRequest) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetNftResponse, AxiosError>(
@@ -123,11 +125,14 @@ export const useSearchNfts = (request: types.SearchNftsRequest) => {
   return { nfts: data, loading: isLoading, error, refetch };
 };
 
-export const useTransaction = (request: types.GetTransactionRequest) => {
+export const useTransaction = (
+  request: types.GetTransactionRequest, 
+  options?: { refetchInterval: UseQueryOptions<types.GetTransactionResponse, AxiosError>["refetchInterval"] }
+) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetTransactionResponse, AxiosError>(
     ["transaction", request],
     () => underdogClient.getTransaction(request),
-    { retry: false }
+    { retry: false, ...options }
   );
 
   useEffect(() => {
