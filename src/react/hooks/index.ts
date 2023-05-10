@@ -130,7 +130,7 @@ export const useTransaction = (
   options?: { refetchInterval: UseQueryOptions<types.GetTransactionResponse | undefined, AxiosError>["refetchInterval"] }
 ) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetTransactionResponse | undefined, AxiosError>(
-    ["transaction", request],
+    ["transaction", JSON.stringify(request)],
     () => request.params.transactionId ? underdogClient.getTransaction(request) : undefined,
     { retry: false, ...options }
   );
