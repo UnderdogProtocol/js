@@ -119,11 +119,6 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.17.18.tgz#3a8e57153905308db357fd02f57c180ee3a0a1fa"
   integrity sha512-qU25Ma1I3NqTSHJUOKi9sAH1/Mzuvlke0ioMJRthLXKm7JiSKVwFghlGbDLOO2sARECGhja4xYfRAZNPAkooYg==
 
-"@faker-js/faker@^7.6.0":
-  version "7.6.0"
-  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-7.6.0.tgz#9ea331766084288634a9247fcd8b84f16ff4ba07"
-  integrity sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==
-
 "@jridgewell/gen-mapping@^0.3.2":
   version "0.3.3"
   resolved "https://registry.yarnpkg.com/@jridgewell/gen-mapping/-/gen-mapping-0.3.3.tgz#7e02e6eb5df901aaedb08514203b096614024098"
@@ -283,10 +278,10 @@
   resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.3.tgz#cef09e3ec9af1d63d2a6cc5b383a737e24e6dcf5"
   integrity sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==
 
-"@underdog-protocol/types@^0.2.5":
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/@underdog-protocol/types/-/types-0.2.5.tgz#f0958bee9381e9d8201d27e20bd989143db124e7"
-  integrity sha512-6yBlXjkLuuja0g0yLdthcaUZbc3FQKXfLraZtvxmOuzcA+HJ3sJbzDWs+5HNDfJkzFnOZWOP+he9usPb+/zBVQ==
+"@underdog-protocol/types@^0.2.6":
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/@underdog-protocol/types/-/types-0.2.6.tgz#95c932b032d58882edc3296727ab8dfdeee917e2"
+  integrity sha512-9lMafNdp6Py2AoF9t7G3jIEPmp5SaplLSPniRHdVx9odaNjn1MVKcfCyuNfAp+kNt2G7ulGuMh8C/vjKUzTsDQ==
   dependencies:
     "@asteasolutions/zod-to-openapi" "^4.6.0"
     zod "^3.21.4"
