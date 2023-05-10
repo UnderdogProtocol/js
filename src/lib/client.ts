@@ -35,7 +35,6 @@ export type UnderdogClientConfig = {
   version?: "v2";
 }
 
-
 export function createUnderdogClient({ network, apiKey, bearer = true, version = "v2", baseUrl: defaultBaseUrl }: UnderdogClientConfig): UnderdogClient {
   const baseUrl = defaultBaseUrl ||
     apiKey ? network === NetworkEnum.Mainnet ? MAINNET_API_URL : DEVNET_API_URL : "/api/underdog";
