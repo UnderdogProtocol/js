@@ -38,8 +38,9 @@ export type UnderdogClientConfig = {
 }
 
 export function createUnderdogClient({ network, apiKey, bearer = true, version = "v2", baseUrl: defaultBaseUrl }: UnderdogClientConfig): UnderdogClient {
-  const baseUrl = defaultBaseUrl ||
-    apiKey ? network === types.NetworkEnum.Mainnet ? types.MAINNET_API_URL : types.DEVNET_API_URL : "/api/underdog";
+  const baseUrl = defaultBaseUrl || (
+    apiKey ? network === types.NetworkEnum.Mainnet ? types.MAINNET_API_URL : types.DEVNET_API_URL : "/api/underdog"
+  );
 
   const instance = axios.create({
     baseURL: baseUrl,
