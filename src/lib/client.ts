@@ -121,7 +121,7 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
   }
 
   const searchNfts = async ({ query, params }: types.SearchNftsRequest): Promise<types.SearchNftsResponse> => {
-    const response = await instance.get(`${projectPath(params)}/search`, { params: query });
+    const response = await instance.get(`${projectPath(params)}/nfts/search`, { params: query });
     return response.data;
   };
 
