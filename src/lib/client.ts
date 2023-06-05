@@ -4,6 +4,7 @@ import axios from "axios";
 export interface UnderdogClient {
   burnNft(request: types.BurnNftRequest): Promise<types.BurnNftResponse>;
   createNft(request: types.CreateNftRequest): Promise<types.CreateNftResponse>;
+  createSft(request: types.CreateSftRequest): Promise<types.CreateSftResponse>;
   createProject(request: types.CreateProjectRequest): Promise<types.CreateProjectResponse>;
   getAllProjects(request: types.GetAllProjectsRequest): Promise<types.GetAllProjectsResponse>;
   getNftClaimLink(request: types.GetNftClaimLinkRequest): Promise<types.GetNftClaimLinkResponse>;
@@ -64,6 +65,11 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     const response = await instance.post(`${projectPath(params)}/nfts`, body);
     return response.data;
   };
+
+  const createSft = async ({ params, body }: types.CreateSftRequest): Promise<types.CreateSftResponse> => {
+    const response = await instance.post(`${projectPath(params)}/sfts`, body);
+    return response.data;
+  }
 
   const createProject = async ({ body }: types.CreateProjectRequest): Promise<types.CreateProjectResponse> => {
     const response = await instance.post(baseProjectPath, body);
@@ -158,6 +164,7 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
   return {
     burnNft,
     createNft,
+    createSft,
     createProject,
     getAllProjects,
     getNftClaimLink,

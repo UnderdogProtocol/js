@@ -1,4 +1,4 @@
-import { QueryObserverOptions, UseQueryOptions, useQuery } from "@tanstack/react-query";
+import { UseQueryOptions, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { useEffect } from "react";
 
