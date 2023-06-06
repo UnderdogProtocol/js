@@ -15,10 +15,6 @@ export const useNft = (request: types.GetNftRequest, underdogClient = defaultUnd
     { retry: false }
   );
 
-  useEffect(() => {
-    refetch();
-  }, [request, refetch]);
-
   return { nft: data, loading: isLoading, error, refetch };
 };
 
@@ -28,10 +24,6 @@ export const useNfts = (request: types.GetNftsRequest, underdogClient = defaultU
     () => underdogClient.getNfts(request),
     { retry: false }
   );
-
-  useEffect(() => {
-    refetch();
-  }, [request, refetch]);
 
   return { nfts: data, loading: isLoading, error, refetch };
 };
@@ -46,10 +38,6 @@ export const useProject = (request: types.GetProjectRequest, underdogClient = de
     }
   );
 
-  useEffect(() => {
-    refetch();
-  }, [refetch, request]);
-
   return { project: data, loading: isLoading, error, refetch };
 };
 
@@ -59,10 +47,6 @@ export const useAllProjects = (request: types.GetAllProjectsRequest, underdogCli
     () => underdogClient.getAllProjects(request),
     { retry: false }
   );
-
-  useEffect(() => {
-    refetch();
-  }, [request, refetch]);
 
   return { allProjects: data, loading: isLoading, error, refetch };
 };
@@ -74,10 +58,6 @@ export const useNftClaimLink = (request: types.GetNftClaimLinkRequest, underdogC
     { retry: false }
   );
 
-  useEffect(() => {
-    refetch();
-  }, [request, refetch]);
-
   return { nftClaimLink: data, loading: isLoading, error, refetch };
 };
 
@@ -87,10 +67,6 @@ export const useProjectStats = (request: types.GetProjectStatsRequest, underdogC
     () => underdogClient.getProjectStats(request),
     { retry: false }
   );
-
-  useEffect(() => {
-    refetch();
-  }, [request, refetch]);
 
   return { projectStats: data, loading: isLoading, error, refetch };
 };
@@ -102,10 +78,6 @@ export const useProjects = (request: types.GetProjectsRequest, underdogClient = 
     { retry: false }
   );
 
-  useEffect(() => {
-    refetch();
-  }, [request, refetch]);
-
   return { projects: data, loading: isLoading, error, refetch };
 };
 
@@ -115,10 +87,6 @@ export const useSearchNfts = (request: types.SearchNftsRequest, underdogClient =
     () => underdogClient.searchNfts(request),
     { retry: false }
   );
-
-  useEffect(() => {
-    refetch();
-  }, [request, refetch]);
 
   return { nfts: data, loading: isLoading, error, refetch };
 };
@@ -133,10 +101,6 @@ export const useTransaction = (
     () => request.params.transactionId ? underdogClient.getTransaction(request) : null,
     { retry: false, ...options }
   );
-
-  useEffect(() => {
-    refetch();
-  }, [request, refetch]);
 
   return { transaction: data, loading: isLoading, error, refetch };
 }
