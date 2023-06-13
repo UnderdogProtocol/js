@@ -1,12 +1,21 @@
 import { UseQueryOptions, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
-import { useEffect } from "react";
 
 import * as types from "@underdog-protocol/types";
 
 import { createUnderdogClient } from "../../lib";
 
 const defaultUnderdogClient = createUnderdogClient({});
+
+export const useCollection = (request: types.GetCollectionRequest, underdogClient = defaultUnderdogClient) => {
+  const { data, refetch, isLoading, error } = useQuery<types.GetCollectionResponse, AxiosError>(
+    ["collection", request],
+    () => underdogClient.getCollection(request),
+    { retry: false }
+  );
+
+  return { collection: data, loading: isLoading, error, refetch };
+}
 
 export const useNft = (request: types.GetNftRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetNftResponse, AxiosError>(

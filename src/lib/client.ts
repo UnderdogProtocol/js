@@ -8,6 +8,7 @@ export interface UnderdogClient {
   createSft(request: types.CreateSftRequest): Promise<types.CreateSftResponse>;
   batchSft(request: types.BatchSftRequest): Promise<void>;
   createProject(request: types.CreateProjectRequest): Promise<types.CreateProjectResponse>;
+  getCollection(request: types.GetCollectionRequest): Promise<types.GetCollectionResponse>;
   getAllProjects(request: types.GetAllProjectsRequest): Promise<types.GetAllProjectsResponse>;
   getNftClaimLink(request: types.GetNftClaimLinkRequest): Promise<types.GetNftClaimLinkResponse>;
   getNft(request: types.GetNftRequest): Promise<types.GetNftResponse>;
@@ -90,6 +91,11 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
 
   const getAllProjects = async ({ query }: types.GetAllProjectsRequest): Promise<types.GetAllProjectsResponse> => {
     const response = await instance.get(baseProjectPath, { params: query });
+    return response.data;
+  };
+
+  const getCollection = async ({ params }: types.GetCollectionRequest): Promise<types.GetCollectionResponse> => {
+    const response = await instance.get(`${version}/collections/${params.mintAddress}`);
     return response.data;
   };
 
@@ -181,6 +187,7 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     createSft,
     createProject,
     getAllProjects,
+    getCollection,
     getNftClaimLink,
     getNft,
     getNfts,
