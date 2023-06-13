@@ -27,6 +27,16 @@ export const useNft = (request: types.GetNftRequest, underdogClient = defaultUnd
   return { nft: data, loading: isLoading, error, refetch };
 };
 
+export const useNftByMintAddress = (request: types.GetNftByMintAddressRequest, underdogClient = defaultUnderdogClient) => {
+  const { data, refetch, isLoading, error } = useQuery<types.GetNftByMintAddressResponse, AxiosError>(
+    ["nftByMintAddress", request],
+    () => underdogClient.getNftByMintAddress(request),
+    { retry: false }
+  );
+
+  return { nft: data, loading: isLoading, error, refetch };
+}
+
 export const useNfts = (request: types.GetNftsRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetNftsResponse, AxiosError>(
     ["nfts", request],

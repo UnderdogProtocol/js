@@ -12,6 +12,7 @@ export interface UnderdogClient {
   getAllProjects(request: types.GetAllProjectsRequest): Promise<types.GetAllProjectsResponse>;
   getNftClaimLink(request: types.GetNftClaimLinkRequest): Promise<types.GetNftClaimLinkResponse>;
   getNft(request: types.GetNftRequest): Promise<types.GetNftResponse>;
+  getNftByMintAddress(request: types.GetNftByMintAddressRequest): Promise<types.GetNftByMintAddressResponse>;
   getNfts(request: types.GetNftsRequest): Promise<types.GetNftsResponse>;
   getProject(request: types.GetProjectRequest): Promise<types.GetProjectResponse>;
   getProjectStats(request: types.GetProjectStatsRequest): Promise<types.GetProjectStatsResponse>;
@@ -95,7 +96,7 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
   };
 
   const getCollection = async ({ params }: types.GetCollectionRequest): Promise<types.GetCollectionResponse> => {
-    const response = await instance.get(`${version}/collections/${params.mintAddress}`);
+    const response = await instance.get(`/${version}/collections/${params.mintAddress}`);
     return response.data;
   };
 
@@ -106,6 +107,11 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
 
   const getNft = async ({ params }: types.GetNftRequest): Promise<types.GetNftResponse> => {
     const response = await instance.get(nftPath(params));
+    return response.data;
+  };
+
+  const getNftByMintAddress = async ({ params }: types.GetNftByMintAddressRequest): Promise<types.GetNftByMintAddressResponse> => {
+    const response = await instance.get(`/${version}/nfts/${params.mintAddress}`);
     return response.data;
   };
 
@@ -190,6 +196,7 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     getCollection,
     getNftClaimLink,
     getNft,
+    getNftByMintAddress,
     getNfts,
     getProject,
     getProjectStats,
