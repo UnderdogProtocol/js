@@ -349,10 +349,10 @@
   dependencies:
     "@types/node" "*"
 
-"@underdog-protocol/types@0.3.13":
-  version "0.3.13"
-  resolved "https://registry.yarnpkg.com/@underdog-protocol/types/-/types-0.3.13.tgz#b22808ab4ed44bde74996af8c7f41951bd5d395c"
-  integrity sha512-mWnJn0gWug4UTmvxhuSoov3Zvv9YoYKT8WZBpDAEnzAjMFQKP8glFpCXF3FU7xJsfHsoPvbeOX7v2Ef55K6NZA==
+"@underdog-protocol/types@0.3.14":
+  version "0.3.14"
+  resolved "https://registry.yarnpkg.com/@underdog-protocol/types/-/types-0.3.14.tgz#d52405240aac8ab83b893e55ca8a0c28c29f7b0b"
+  integrity sha512-1qbr5P+SKbQ62pe5l+apIHoMjUN9eGrQDcXb4PwAVGNKxRE3qZvoUu+NFznqzCS8GjPcT/Tg7QQKDP/jWz5YqA==
   dependencies:
     "@asteasolutions/zod-to-openapi" "^4.6.0"
     "@solana/web3.js" "^1.73.2"

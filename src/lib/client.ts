@@ -32,8 +32,12 @@ export interface UnderdogClient {
   getOrgs(request: types.GetOrgsRequest): Promise<types.GetOrgsResponse>;
   getOrg(request: types.GetOrgRequest): Promise<types.GetOrgResponse>;
   updateOrg(request: types.UpdateOrgRequest): Promise<types.UpdateOrgResponse>;
+  createMember(request: types.CreateMemberRequest): Promise<types.CreateMemberResponse>;
   getMembers(request: types.GetMembersRequest): Promise<types.GetMembersResponse>;
-  addMember(request: types.AddMemberRequest): Promise<types.AddMemberResponse>;
+  createWebhook(request: types.CreateWebhookRequest): Promise<types.CreateWebhookResponse>;
+  getWebhooks(request: types.GetWebhooksRequest): Promise<types.GetWebhooksResponse>;
+  getWebhook(request: types.GetWebhookRequest): Promise<types.GetWebhookResponse>;
+  deleteWebhook(request: types.DeleteWebhookRequest): Promise<void>;
 }
 
 export type UnderdogClientConfig = {
@@ -222,9 +226,28 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     return response.data;
   }
 
-  const addMember = async ({ params, body }: types.AddMemberRequest): Promise<types.AddMemberResponse> => {
+  const createMember = async ({ params, body }: types.CreateMemberRequest): Promise<types.CreateMemberResponse> => {
     const response = await instance.post(`/${version}/orgs/${params.orgId}/members`, body);
     return response.data;
+  }
+
+  const createWebhook = async ({ body }: types.CreateWebhookRequest): Promise<types.CreateWebhookResponse> => {
+    const response = await instance.post(`/${version}/webhooks`, body);
+    return response.data;
+  }
+
+  const getWebhooks = async ({ query }: types.GetWebhooksRequest): Promise<types.GetWebhooksResponse> => {
+    const response = await instance.get(`/${version}/webhooks`, { params: query });
+    return response.data;
+  }
+
+  const getWebhook = async ({ params }: types.GetWebhookRequest): Promise<types.GetWebhookResponse> => {
+    const response = await instance.get(`/${version}/webhooks/${params.webhookId}`);
+    return response.data;
+  }
+
+  const deleteWebhook = async ({ params }: types.DeleteWebhookRequest): Promise<void> => {
+    await instance.delete(`/${version}/webhooks/${params.webhookId}`);
   }
 
   return {
@@ -259,6 +282,10 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     getOrg,
     updateOrg,
     getMembers,
-    addMember,
+    createMember,
+    createWebhook,
+    getWebhooks,
+    getWebhook,
+    deleteWebhook
   }
 }

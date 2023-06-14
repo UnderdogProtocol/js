@@ -183,3 +183,23 @@ export const useMembers = (request: types.GetMembersRequest, underdogClient = de
 
   return { members: data, loading: isLoading, error, refetch };
 }
+
+export const useWebhooks = (request: types.GetWebhooksRequest, underdogClient = defaultUnderdogClient) => {
+  const { data, refetch, isLoading, error } = useQuery<types.GetWebhooksResponse, AxiosError>(
+    ["webhooks", request, underdogClient],
+    () => underdogClient.getWebhooks(request),
+    { retry: false }
+  );
+
+  return { webhooks: data, loading: isLoading, error, refetch };
+}
+
+export const useWebhook = (request: types.GetWebhookRequest, underdogClient = defaultUnderdogClient) => {
+  const { data, refetch, isLoading, error } = useQuery<types.GetWebhookResponse, AxiosError>(
+    ["webhook", request, underdogClient],
+    () => underdogClient.getWebhook(request),
+    { retry: false }
+  );
+
+  return { webhook: data, loading: isLoading, error, refetch };
+}
