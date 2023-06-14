@@ -27,6 +27,8 @@ export interface UnderdogClient {
   updateProjectSymbol(request: types.UpdateProjectSymbolRequest): Promise<types.UpdateProjectSymbolResponse>;
   getTransactions(request: types.GetTransactionsRequest): Promise<types.GetTransactionsResponse>;
   getTransaction(request: types.GetTransactionRequest): Promise<types.GetTransactionResponse>;
+  getRequests(request: types.GetRequestsRequest): Promise<types.GetRequestsResponse>;
+  getRequest(request: types.GetRequestRequest): Promise<types.GetRequestResponse>;
 }
 
 export type UnderdogClientConfig = {
@@ -185,6 +187,16 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     return response.data;
   }
 
+  const getRequest = async ({ params }: types.GetRequestRequest): Promise<types.GetRequestResponse> => {
+    const response = await instance.get(`/${version}/requests/${params.requestId}`);
+    return response.data;
+  }
+
+  const getRequests = async ({ query }: types.GetRequestsRequest): Promise<types.GetRequestsResponse> => {
+    const response = await instance.get(`/${version}/requests`, { params: query });
+    return response.data;
+  }
+
   return {
     burnNft,
     batchNft,
@@ -211,5 +223,7 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     updateProjectSymbol,
     getTransactions,
     getTransaction,
+    getRequest,
+    getRequests,
   }
 }
