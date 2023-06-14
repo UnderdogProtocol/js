@@ -1,5 +1,5 @@
 import { networkToUnderdogApiEndpoints, NetworkEnum } from "@underdog-protocol/types";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import path from "path";
 
@@ -14,7 +14,7 @@ const NextUnderdogApiHandler = async (
   res: NextApiResponse,
   { bearer = true, apiKey, network }: UnderdogOptions
 ) => {
-  const { underdog, ...query } = req.query;
+  const { underdog, network: _network, ...query } = req.query;
   const apiUrl = networkToUnderdogApiEndpoints[network];
 
   const url = `${apiUrl}/${path.join(...(underdog as string[]))}?${new URLSearchParams(

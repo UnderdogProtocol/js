@@ -29,6 +29,11 @@ export interface UnderdogClient {
   getTransaction(request: types.GetTransactionRequest): Promise<types.GetTransactionResponse>;
   getRequests(request: types.GetRequestsRequest): Promise<types.GetRequestsResponse>;
   getRequest(request: types.GetRequestRequest): Promise<types.GetRequestResponse>;
+  getOrgs(request: types.GetOrgsRequest): Promise<types.GetOrgsResponse>;
+  getOrg(request: types.GetOrgRequest): Promise<types.GetOrgResponse>;
+  updateOrg(request: types.UpdateOrgRequest): Promise<types.UpdateOrgResponse>;
+  getMembers(request: types.GetMembersRequest): Promise<types.GetMembersResponse>;
+  addMember(request: types.AddMemberRequest): Promise<types.AddMemberResponse>;
 }
 
 export type UnderdogClientConfig = {
@@ -197,6 +202,31 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     return response.data;
   }
 
+  const getOrgs = async ({ query }: types.GetOrgsRequest): Promise<types.GetOrgsResponse> => {
+    const response = await instance.get(`/${version}/orgs`, { params: query });
+    return response.data;
+  }
+
+  const getOrg = async ({ params }: types.GetOrgRequest): Promise<types.GetOrgResponse> => {
+    const response = await instance.get(`/${version}/orgs/${params.orgId}`);
+    return response.data;
+  }
+
+  const updateOrg = async ({ params, body }: types.UpdateOrgRequest): Promise<types.UpdateOrgResponse> => {
+    const response = await instance.put(`/${version}/orgs/${params.orgId}`, body);
+    return response.data;
+  }
+
+  const getMembers = async ({ params, query }: types.GetMembersRequest): Promise<types.GetMembersResponse> => {
+    const response = await instance.get(`/${version}/orgs/${params.orgId}/members`, { params: query });
+    return response.data;
+  }
+
+  const addMember = async ({ params, body }: types.AddMemberRequest): Promise<types.AddMemberResponse> => {
+    const response = await instance.post(`/${version}/orgs/${params.orgId}/members`, body);
+    return response.data;
+  }
+
   return {
     burnNft,
     batchNft,
@@ -225,5 +255,10 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     getTransaction,
     getRequest,
     getRequests,
+    getOrgs,
+    getOrg,
+    updateOrg,
+    getMembers,
+    addMember,
   }
 }

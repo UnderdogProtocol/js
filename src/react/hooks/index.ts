@@ -153,3 +153,33 @@ export const useRequests = (request: types.GetRequestsRequest, underdogClient = 
 
   return { requests: data, loading: isLoading, error, refetch };
 }
+
+export const useOrg = (request: types.GetOrgRequest, underdogClient = defaultUnderdogClient) => {
+  const { data, refetch, isLoading, error } = useQuery<types.GetOrgResponse, AxiosError>(
+    ["org", request, underdogClient],
+    () => underdogClient.getOrg(request),
+    { retry: false }
+  );
+
+  return { org: data, loading: isLoading, error, refetch };
+}
+
+export const useOrgs = (request: types.GetOrgsRequest, underdogClient = defaultUnderdogClient) => {
+  const { data, refetch, isLoading, error } = useQuery<types.GetOrgsResponse, AxiosError>(
+    ["orgs", request, underdogClient],
+    () => underdogClient.getOrgs(request),
+    { retry: false }
+  );
+
+  return { orgs: data, loading: isLoading, error, refetch };
+}
+
+export const useMembers = (request: types.GetMembersRequest, underdogClient = defaultUnderdogClient) => {
+  const { data, refetch, isLoading, error } = useQuery<types.GetMembersResponse, AxiosError>(
+    ["members", request, underdogClient],
+    () => underdogClient.getMembers(request),
+    { retry: false }
+  );
+
+  return { members: data, loading: isLoading, error, refetch };
+}
