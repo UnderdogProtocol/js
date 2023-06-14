@@ -38,6 +38,10 @@ export interface UnderdogClient {
   getWebhooks(request: types.GetWebhooksRequest): Promise<types.GetWebhooksResponse>;
   getWebhook(request: types.GetWebhookRequest): Promise<types.GetWebhookResponse>;
   deleteWebhook(request: types.DeleteWebhookRequest): Promise<void>;
+  createKey(request: types.CreateKeyRequest): Promise<types.CreateKeyResponse>;
+  getKeys(request: types.GetKeysRequest): Promise<types.GetKeysResponse>;
+  updateKey(request: types.UpdateKeyRequest): Promise<types.UpdateKeyResponse>;
+  deleteKey(request: types.DeleteKeyRequest): Promise<void>;
 }
 
 export type UnderdogClientConfig = {
@@ -250,6 +254,25 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     await instance.delete(`/${version}/webhooks/${params.webhookId}`);
   }
 
+  const createKey = async ({ params }: types.CreateKeyRequest): Promise<types.CreateKeyResponse> => {
+    const response = await instance.post(`/${version}/orgs/${params.orgId}/keys`);
+    return response.data;
+  }
+
+  const getKeys = async ({ query, params }: types.GetKeysRequest): Promise<types.GetKeysResponse> => {
+    const response = await instance.get(`/${version}/orgs/${params.orgId}/keys`, { params: query });
+    return response.data;
+  }
+
+  const updateKey = async ({ params, body }: types.UpdateKeyRequest): Promise<types.UpdateKeyResponse> => {
+    const response = await instance.put(`/${version}/orgs/${params.orgId}/keys/${params.prefix}`, body);
+    return response.data;
+  }
+
+  const deleteKey = async ({ params }: types.DeleteKeyRequest): Promise<void> => {
+    await instance.delete(`/${version}/orgs/${params.orgId}/keys/${params.prefix}`);
+  }
+
   return {
     burnNft,
     batchNft,
@@ -286,6 +309,10 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     createWebhook,
     getWebhooks,
     getWebhook,
-    deleteWebhook
+    deleteWebhook,
+    createKey,
+    getKeys,
+    updateKey,
+    deleteKey,
   }
 }

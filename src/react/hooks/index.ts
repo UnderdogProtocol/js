@@ -203,3 +203,13 @@ export const useWebhook = (request: types.GetWebhookRequest, underdogClient = de
 
   return { webhook: data, loading: isLoading, error, refetch };
 }
+
+export const useKeys = (request: types.GetKeysRequest, underdogClient = defaultUnderdogClient) => {
+  const { data, refetch, isLoading, error } = useQuery<types.GetKeysResponse, AxiosError>(
+    ["keys", request, underdogClient],
+    () => underdogClient.getKeys(request),
+    { retry: false }
+  );
+
+  return { keys: data, loading: isLoading, error, refetch };
+}
