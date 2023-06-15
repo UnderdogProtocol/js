@@ -213,3 +213,13 @@ export const useKeys = (request: types.GetKeysRequest, underdogClient = defaultU
 
   return { keys: data, loading: isLoading, error, refetch };
 }
+
+export const useMe = (underdogClient = defaultUnderdogClient) => {
+  const { data, refetch, isLoading, error } = useQuery<types.GetMeResponse, AxiosError>(
+    ["me", underdogClient],
+    () => underdogClient.getMe(),
+    { retry: false }
+  );
+
+  return { me: data, loading: isLoading, error, refetch };
+}

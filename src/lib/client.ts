@@ -42,6 +42,7 @@ export interface UnderdogClient {
   getKeys(request: types.GetKeysRequest): Promise<types.GetKeysResponse>;
   updateKey(request: types.UpdateKeyRequest): Promise<types.UpdateKeyResponse>;
   deleteKey(request: types.DeleteKeyRequest): Promise<void>;
+  getMe(): Promise<types.GetMeResponse>;
 }
 
 export type UnderdogClientConfig = {
@@ -273,6 +274,11 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     await instance.delete(`/${version}/orgs/${params.orgId}/keys/${params.prefix}`);
   }
 
+  const getMe = async (): Promise<types.GetMeResponse> => {
+    const response = await instance.get(`/${version}/wallets/me`);
+    return response.data;
+  }
+
   return {
     burnNft,
     batchNft,
@@ -314,5 +320,6 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     getKeys,
     updateKey,
     deleteKey,
+    getMe,
   }
 }
