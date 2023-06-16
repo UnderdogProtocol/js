@@ -9,7 +9,7 @@ const defaultUnderdogClient = createUnderdogClient({});
 
 export const useCollection = (request: types.GetCollectionRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetCollectionResponse, AxiosError>(
-    ["collection", request, underdogClient],
+    ["collection", request, underdogClient.network],
     () => underdogClient.getCollection(request),
     { retry: false }
   );
@@ -19,7 +19,7 @@ export const useCollection = (request: types.GetCollectionRequest, underdogClien
 
 export const useNft = (request: types.GetNftRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetNftResponse, AxiosError>(
-    ["nft", request, underdogClient],
+    ["nft", request, underdogClient.network],
     () => underdogClient.getNft(request),
     { retry: false }
   );
@@ -29,7 +29,7 @@ export const useNft = (request: types.GetNftRequest, underdogClient = defaultUnd
 
 export const useNftByMintAddress = (request: types.GetNftByMintAddressRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetNftByMintAddressResponse, AxiosError>(
-    ["nftByMintAddress", request, underdogClient],
+    ["nftByMintAddress", request, underdogClient.network],
     () => underdogClient.getNftByMintAddress(request),
     { retry: false }
   );
@@ -39,7 +39,7 @@ export const useNftByMintAddress = (request: types.GetNftByMintAddressRequest, u
 
 export const useNfts = (request: types.GetNftsRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetNftsResponse, AxiosError>(
-    ["nfts", request, underdogClient],
+    ["nfts", request, underdogClient.network],
     () => underdogClient.getNfts(request),
     { retry: false }
   );
@@ -49,7 +49,7 @@ export const useNfts = (request: types.GetNftsRequest, underdogClient = defaultU
 
 export const useProject = (request: types.GetProjectRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetProjectResponse, AxiosError>(
-    ["project", request, underdogClient],
+    ["project", request, underdogClient.network],
     () => underdogClient.getProject(request),
     {
       retry: false,
@@ -62,7 +62,7 @@ export const useProject = (request: types.GetProjectRequest, underdogClient = de
 
 export const useAllProjects = (request: types.GetAllProjectsRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetAllProjectsResponse, AxiosError>(
-    ["allProjects", request, underdogClient],
+    ["allProjects", request, underdogClient.network],
     () => underdogClient.getAllProjects(request),
     { retry: false }
   );
@@ -72,7 +72,7 @@ export const useAllProjects = (request: types.GetAllProjectsRequest, underdogCli
 
 export const useNftClaimLink = (request: types.GetNftClaimLinkRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetNftClaimLinkResponse, AxiosError>(
-    ["nftClaimLink", request, underdogClient],
+    ["nftClaimLink", request, underdogClient.network],
     () => underdogClient.getNftClaimLink(request),
     { retry: false }
   );
@@ -82,7 +82,7 @@ export const useNftClaimLink = (request: types.GetNftClaimLinkRequest, underdogC
 
 export const useProjectStats = (request: types.GetProjectStatsRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetProjectStatsResponse, AxiosError>(
-    ["projectStats", request, underdogClient],
+    ["projectStats", request, underdogClient.network],
     () => underdogClient.getProjectStats(request),
     { retry: false }
   );
@@ -92,7 +92,7 @@ export const useProjectStats = (request: types.GetProjectStatsRequest, underdogC
 
 export const useProjects = (request: types.GetProjectsRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetProjectsResponse, AxiosError>(
-    ["projects", request, underdogClient],
+    ["projects", request, underdogClient.network],
     () => underdogClient.getProjects(request),
     { retry: false }
   );
@@ -102,7 +102,7 @@ export const useProjects = (request: types.GetProjectsRequest, underdogClient = 
 
 export const useSearchNfts = (request: types.SearchNftsRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.SearchNftsResponse, AxiosError>(
-    ["searchNfts", request, underdogClient],
+    ["searchNfts", request, underdogClient.network],
     () => underdogClient.searchNfts(request),
     { retry: false }
   );
@@ -116,7 +116,7 @@ export const useTransaction = (
   underdogClient = defaultUnderdogClient
 ) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetTransactionResponse | null, AxiosError>(
-    ["transaction", request, underdogClient],
+    ["transaction", request, underdogClient.network],
     () => request.params.transactionId ? underdogClient.getTransaction(request) : null,
     { retry: false, ...options }
   );
@@ -126,7 +126,7 @@ export const useTransaction = (
 
 export const useTransactions = (request: types.GetTransactionsRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetTransactionsResponse, AxiosError>(
-    ["transactions", request, underdogClient],
+    ["transactions", request, underdogClient.network],
     () => underdogClient.getTransactions(request),
     { retry: false }
   );
@@ -136,7 +136,7 @@ export const useTransactions = (request: types.GetTransactionsRequest, underdogC
 
 export const useRequest = (request: types.GetRequestRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetRequestResponse, AxiosError>(
-    ["request", request, underdogClient],
+    ["request", request, underdogClient.network],
     () => underdogClient.getRequest(request),
     { retry: false }
   );
@@ -146,7 +146,7 @@ export const useRequest = (request: types.GetRequestRequest, underdogClient = de
 
 export const useRequests = (request: types.GetRequestsRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetRequestsResponse, AxiosError>(
-    ["requests", request, underdogClient],
+    ["requests", request, underdogClient.network],
     () => underdogClient.getRequests(request),
     { retry: false }
   );
@@ -156,7 +156,7 @@ export const useRequests = (request: types.GetRequestsRequest, underdogClient = 
 
 export const useOrg = (request: types.GetOrgRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetOrgResponse, AxiosError>(
-    ["org", request, underdogClient],
+    ["org", request, underdogClient.network],
     () => underdogClient.getOrg(request),
     { retry: false }
   );
@@ -166,7 +166,7 @@ export const useOrg = (request: types.GetOrgRequest, underdogClient = defaultUnd
 
 export const useOrgs = (request: types.GetOrgsRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetOrgsResponse, AxiosError>(
-    ["orgs", request, underdogClient],
+    ["orgs", request, underdogClient.network],
     () => underdogClient.getOrgs(request),
     { retry: false }
   );
@@ -176,7 +176,7 @@ export const useOrgs = (request: types.GetOrgsRequest, underdogClient = defaultU
 
 export const useMembers = (request: types.GetMembersRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetMembersResponse, AxiosError>(
-    ["members", request, underdogClient],
+    ["members", request, underdogClient.network],
     () => underdogClient.getMembers(request),
     { retry: false }
   );
@@ -186,7 +186,7 @@ export const useMembers = (request: types.GetMembersRequest, underdogClient = de
 
 export const useWebhooks = (request: types.GetWebhooksRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetWebhooksResponse, AxiosError>(
-    ["webhooks", request, underdogClient],
+    ["webhooks", request, underdogClient.network],
     () => underdogClient.getWebhooks(request),
     { retry: false }
   );
@@ -196,7 +196,7 @@ export const useWebhooks = (request: types.GetWebhooksRequest, underdogClient = 
 
 export const useWebhook = (request: types.GetWebhookRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetWebhookResponse, AxiosError>(
-    ["webhook", request, underdogClient],
+    ["webhook", request, underdogClient.network],
     () => underdogClient.getWebhook(request),
     { retry: false }
   );
@@ -206,7 +206,7 @@ export const useWebhook = (request: types.GetWebhookRequest, underdogClient = de
 
 export const useKeys = (request: types.GetKeysRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetKeysResponse, AxiosError>(
-    ["keys", request, underdogClient],
+    ["keys", request, underdogClient.network],
     () => underdogClient.getKeys(request),
     { retry: false }
   );
@@ -216,7 +216,7 @@ export const useKeys = (request: types.GetKeysRequest, underdogClient = defaultU
 
 export const useMe = (underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetMeResponse, AxiosError>(
-    ["me", underdogClient],
+    ["me", underdogClient.network],
     () => underdogClient.getMe(),
     { retry: false }
   );
