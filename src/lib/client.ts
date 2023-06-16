@@ -2,7 +2,7 @@ import * as types from "@underdog-protocol/types";
 import axios from "axios";
 
 export interface UnderdogClient {
-  network: types.NetworkEnum;
+  network?: types.NetworkEnum;
   burnNft(request: types.BurnNftRequest): Promise<types.BurnNftResponse>;
   createNft(request: types.CreateNftRequest): Promise<types.CreateNftResponse>;
   batchNft(request: types.BatchNftRequest): Promise<void>;
