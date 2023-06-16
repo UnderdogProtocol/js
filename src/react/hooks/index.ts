@@ -4,6 +4,7 @@ import { AxiosError } from "axios";
 import * as types from "@underdog-protocol/types";
 
 import { createUnderdogClient } from "../../lib";
+import { useEffect } from "react";
 
 const defaultUnderdogClient = createUnderdogClient({});
 
@@ -13,6 +14,10 @@ export const useCollection = (request: types.GetCollectionRequest, underdogClien
     () => underdogClient.getCollection(request),
     { retry: false }
   );
+
+  useEffect(() => {
+    refetch();
+  }, [underdogClient.network]);
 
   return { collection: data, loading: isLoading, error, refetch };
 }
@@ -24,6 +29,10 @@ export const useNft = (request: types.GetNftRequest, underdogClient = defaultUnd
     { retry: false }
   );
 
+  useEffect(() => {
+    refetch();
+  }, [underdogClient.network]);
+
   return { nft: data, loading: isLoading, error, refetch };
 };
 
@@ -34,6 +43,10 @@ export const useNftByMintAddress = (request: types.GetNftByMintAddressRequest, u
     { retry: false }
   );
 
+  useEffect(() => {
+    refetch();
+  }, [underdogClient.network]);
+
   return { nft: data, loading: isLoading, error, refetch };
 }
 
@@ -43,6 +56,10 @@ export const useNfts = (request: types.GetNftsRequest, underdogClient = defaultU
     () => underdogClient.getNfts(request),
     { retry: false }
   );
+
+  useEffect(() => {
+    refetch();
+  }, [underdogClient.network]);
 
   return { nfts: data, loading: isLoading, error, refetch };
 };
@@ -57,6 +74,10 @@ export const useProject = (request: types.GetProjectRequest, underdogClient = de
     }
   );
 
+  useEffect(() => {
+    refetch();
+  }, [underdogClient.network]);
+
   return { project: data, loading: isLoading, error, refetch };
 };
 
@@ -66,6 +87,10 @@ export const useAllProjects = (request: types.GetAllProjectsRequest, underdogCli
     () => underdogClient.getAllProjects(request),
     { retry: false }
   );
+
+  useEffect(() => {
+    refetch();
+  }, [underdogClient.network]);
 
   return { allProjects: data, loading: isLoading, error, refetch };
 };
@@ -77,6 +102,10 @@ export const useNftClaimLink = (request: types.GetNftClaimLinkRequest, underdogC
     { retry: false }
   );
 
+  useEffect(() => {
+    refetch();
+  }, [underdogClient.network]);
+
   return { nftClaimLink: data, loading: isLoading, error, refetch };
 };
 
@@ -86,6 +115,10 @@ export const useProjectStats = (request: types.GetProjectStatsRequest, underdogC
     () => underdogClient.getProjectStats(request),
     { retry: false }
   );
+
+  useEffect(() => {
+    refetch();
+  }, [underdogClient.network]);
 
   return { projectStats: data, loading: isLoading, error, refetch };
 };
@@ -97,6 +130,10 @@ export const useProjects = (request: types.GetProjectsRequest, underdogClient = 
     { retry: false }
   );
 
+  useEffect(() => {
+    refetch();
+  }, [underdogClient.network]);
+
   return { projects: data, loading: isLoading, error, refetch };
 };
 
@@ -106,6 +143,10 @@ export const useSearchNfts = (request: types.SearchNftsRequest, underdogClient =
     () => underdogClient.searchNfts(request),
     { retry: false }
   );
+
+  useEffect(() => {
+    refetch();
+  }, [underdogClient.network]);
 
   return { nfts: data, loading: isLoading, error, refetch };
 };
@@ -121,6 +162,10 @@ export const useTransaction = (
     { retry: false, ...options }
   );
 
+  useEffect(() => {
+    refetch();
+  }, [underdogClient.network]);
+
   return { transaction: data, loading: isLoading, error, refetch };
 }
 
@@ -130,6 +175,10 @@ export const useTransactions = (request: types.GetTransactionsRequest, underdogC
     () => underdogClient.getTransactions(request),
     { retry: false }
   );
+
+  useEffect(() => {
+    refetch();
+  }, [underdogClient.network]);
 
   return { transactions: data, loading: isLoading, error, refetch };
 }
@@ -151,6 +200,10 @@ export const useRequests = (request: types.GetRequestsRequest, underdogClient = 
     { retry: false }
   );
 
+  useEffect(() => {
+    refetch();
+  }, [underdogClient.network]);
+
   return { requests: data, loading: isLoading, error, refetch };
 }
 
@@ -170,6 +223,10 @@ export const useOrgs = (request: types.GetOrgsRequest, underdogClient = defaultU
     () => underdogClient.getOrgs(request),
     { retry: false }
   );
+
+  useEffect(() => {
+    refetch();
+  }, [underdogClient.network]);
 
   return { orgs: data, loading: isLoading, error, refetch };
 }
