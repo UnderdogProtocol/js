@@ -72,8 +72,11 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
   });
 
   const baseProjectPath = `/${version}/projects`;
-  const typeToProjectCode = (type: types.ProjectParams["type"]) => type.compressed ? "c" : type.transferable ? "t" : "n";
-  const projectPath = ({ type, projectId }: types.ProjectParams) => `${baseProjectPath}/${typeToProjectCode(type)}/${projectId}`;
+  const typeToProjectCode = (type: Required<types.ProjectParams>["type"]) => type.compressed ? "c" : type.transferable ? "t" : "n";
+  const projectPath = ({ type, projectId }: types.ProjectParams) => (
+    type ?  `${baseProjectPath}/${typeToProjectCode(type)}/${projectId}` : `${baseProjectPath}/${projectId}` 
+  );
+
   const nftPath = ({ nftId, ...projectParams }: types.NftParams) => `${projectPath(projectParams)}/nfts/${nftId}`;
   const nonTransferableNftPath = ({ nftId, projectId }: Pick<types.NftParams, "nftId" | "projectId">) => `${projectPath({ type: { transferable: false, compressed: false }, projectId })}/nfts/${nftId}`;
 
