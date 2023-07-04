@@ -1,6 +1,6 @@
 {
   "name": "@underdog-protocol/js",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.29.5",
-    "@underdog-protocol/types": "0.4.0",
+    "@underdog-protocol/types": "0.4.2",
     "axios": "^1.3.6",
     "next": "^13.3.4",
     "react": "^18.2.0",
