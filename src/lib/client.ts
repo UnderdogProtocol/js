@@ -151,7 +151,9 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
   };
 
   const getProjects = async ({ params, query }: types.GetProjectsRequest): Promise<types.GetProjectsResponse> => {
-    const response = await instance.get(`${baseProjectPath}/${typeToProjectCode(params.type)}`, { params: query });
+    const path = params.type ? `${baseProjectPath}/${typeToProjectCode(params.type)}` : baseProjectPath;
+
+    const response = await instance.get(path, { params: query });
     return response.data;
   };
 
