@@ -60,16 +60,6 @@ export const useProject = (request: types.GetProjectRequest, underdogClient = de
   return { project: data, loading: isLoading, error, refetch };
 };
 
-export const useAllProjects = (request: types.GetAllProjectsRequest, underdogClient = defaultUnderdogClient) => {
-  const { data, refetch, isLoading, error } = useQuery<types.GetAllProjectsResponse, AxiosError>(
-    ["allProjects", request, underdogClient.network],
-    () => underdogClient.getAllProjects(request),
-    { retry: false }
-  );
-
-  return { allProjects: data, loading: isLoading, error, refetch };
-};
-
 export const useNftClaimLink = (request: types.GetNftClaimLinkRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetNftClaimLinkResponse, AxiosError>(
     ["nftClaimLink", request, underdogClient.network],

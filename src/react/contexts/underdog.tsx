@@ -9,5 +9,5 @@ type UnderodogProviderProps = {
 const queryClient = new QueryClient();
 
 export function UnderdogProvider({ children }: UnderodogProviderProps) {
-  return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
+  return <QueryClientProvider client={queryClient} contextSharing>{children}</QueryClientProvider>;
 }
