@@ -3,29 +3,22 @@ import axios from "axios";
 
 export interface UnderdogClient {
   network?: types.NetworkEnum;
-  burnNft(request: types.BurnNftRequest): Promise<types.BurnNftResponse>;
   createNft(request: types.CreateNftRequest): Promise<types.CreateNftResponse>;
-  batchNft(request: types.BatchNftRequest): Promise<void>;
   createSft(request: types.CreateSftRequest): Promise<types.CreateSftResponse>;
   batchSft(request: types.BatchSftRequest): Promise<void>;
   createProject(request: types.CreateProjectRequest): Promise<types.CreateProjectResponse>;
   getCollection(request: types.GetCollectionRequest): Promise<types.GetCollectionResponse>;
-  getAllProjects(request: types.GetAllProjectsRequest): Promise<types.GetAllProjectsResponse>;
-  getNftClaimLink(request: types.GetNftClaimLinkRequest): Promise<types.GetNftClaimLinkResponse>;
   getNft(request: types.GetNftRequest): Promise<types.GetNftResponse>;
   getNftByMintAddress(request: types.GetNftByMintAddressRequest): Promise<types.GetNftByMintAddressResponse>;
   getNfts(request: types.GetNftsRequest): Promise<types.GetNftsResponse>;
   getProject(request: types.GetProjectRequest): Promise<types.GetProjectResponse>;
   getProjectStats(request: types.GetProjectStatsRequest): Promise<types.GetProjectStatsResponse>;
-  getProjects(request: types.GetProjectsRequest): Promise<types.GetProjectsResponse>;
+  getProjects(request: types.GetAllProjectsRequest): Promise<types.GetAllProjectsResponse>;
   partialUpdateNft(request: types.PartialUpdateNftRequest): Promise<types.PartialUpdateNftResponse>;
   partialUpdateProject(request: types.PartialUpdateProjectRequest): Promise<types.PartialUpdateProjectResponse>;
-  revokeNft(request: types.RevokeNftRequest): Promise<types.RevokeNftResponse>;
   searchNfts(request: types.SearchNftsRequest): Promise<types.SearchNftsResponse>;
   updateNft(request: types.UpdateNftRequest): Promise<types.UpdateNftResponse>;
-  updateProjectName(request: types.UpdateProjectNameRequest): Promise<types.UpdateProjectNameResponse>;
   updateProject(request: types.UpdateProjectRequest): Promise<types.UpdateProjectResponse>;
-  updateProjectSymbol(request: types.UpdateProjectSymbolRequest): Promise<types.UpdateProjectSymbolResponse>;
   getTransactions(request: types.GetTransactionsRequest): Promise<types.GetTransactionsResponse>;
   getTransaction(request: types.GetTransactionRequest): Promise<types.GetTransactionResponse>;
   getRequests(request: types.GetRequestsRequest): Promise<types.GetRequestsResponse>;
@@ -72,18 +65,9 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
   });
 
   const baseProjectPath = `/${version}/projects`;
-  const typeToProjectCode = (type: Required<types.ProjectParams>["type"]) => type.compressed ? "c" : type.transferable ? "t" : "n";
-  const projectPath = ({ type, projectId }: types.ProjectParams) => (
-    type ?  `${baseProjectPath}/${typeToProjectCode(type)}/${projectId}` : `${baseProjectPath}/${projectId}` 
-  );
+  const projectPath = ({ projectId }: types.ProjectParams) => `${baseProjectPath}/${projectId}`;
 
   const nftPath = ({ nftId, ...projectParams }: types.NftParams) => `${projectPath(projectParams)}/nfts/${nftId}`;
-  const nonTransferableNftPath = ({ nftId, projectId }: Pick<types.NftParams, "nftId" | "projectId">) => `${projectPath({ type: { transferable: false, compressed: false }, projectId })}/nfts/${nftId}`;
-
-  const burnNft = async ({ params }: types.BurnNftRequest): Promise<types.BurnNftResponse> => {
-    const response = await instance.post(`${nonTransferableNftPath(params)}/burn`);
-    return response.data;
-  };
 
   const createNft = async ({ params, body }: types.CreateNftRequest): Promise<types.CreateNftResponse> => {
     const response = await instance.post(`${projectPath(params)}/nfts`, body);
@@ -110,18 +94,13 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     return response.data;
   };
 
-  const getAllProjects = async ({ query }: types.GetAllProjectsRequest): Promise<types.GetAllProjectsResponse> => {
+  const getProjects = async ({ query }: types.GetAllProjectsRequest): Promise<types.GetAllProjectsResponse> => {
     const response = await instance.get(baseProjectPath, { params: query });
     return response.data;
   };
 
   const getCollection = async ({ params }: types.GetCollectionRequest): Promise<types.GetCollectionResponse> => {
     const response = await instance.get(`/${version}/collections/${params.mintAddress}`);
-    return response.data;
-  };
-
-  const getNftClaimLink = async ({ params }: types.GetNftClaimLinkRequest): Promise<types.GetNftClaimLinkResponse> => {
-    const response = await instance.get(`${nonTransferableNftPath(params)}/claim`);
     return response.data;
   };
 
@@ -150,13 +129,6 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     return response.data;
   };
 
-  const getProjects = async ({ params, query }: types.GetProjectsRequest): Promise<types.GetProjectsResponse> => {
-    const path = params.type ? `${baseProjectPath}/${typeToProjectCode(params.type)}` : baseProjectPath;
-
-    const response = await instance.get(path, { params: query });
-    return response.data;
-  };
-
   const partialUpdateNft = async ({ body, params }: types.PartialUpdateNftRequest): Promise<types.PartialUpdateNftResponse> => {
     const response = await instance.patch(nftPath(params), body);
     return response.data;
@@ -166,11 +138,6 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     const response = await instance.patch(projectPath(params), body);
     return response.data;
   };
-
-  const revokeNft = async ({ params }: types.RevokeNftRequest): Promise<types.RevokeNftResponse> => {
-    const response = await instance.post(`${nonTransferableNftPath(params)}/revoke`);
-    return response.data;
-  }
 
   const searchNfts = async ({ query, params }: types.SearchNftsRequest): Promise<types.SearchNftsResponse> => {
     const response = await instance.get(`${projectPath(params)}/nfts/search`, { params: query });
@@ -182,18 +149,8 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     return response.data;
   };
 
-  const updateProjectName = async ({ params, body }: types.UpdateProjectNameRequest): Promise<types.UpdateProjectNameResponse> => {
-    const response = await instance.put(`${projectPath(params)}/name`, body);
-    return response.data;
-  };
-
   const updateProject = async ({ body, params }: types.UpdateProjectRequest): Promise<types.UpdateProjectResponse> => {
     const response = await instance.put(projectPath(params), body);
-    return response.data;
-  };
-
-  const updateProjectSymbol = async ({ params, body }: types.UpdateProjectSymbolRequest): Promise<types.UpdateProjectSymbolResponse> => {
-    const response = await instance.put(`${projectPath(params)}/symbol`, body);
     return response.data;
   };
 
@@ -287,15 +244,11 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
 
   return {
     network,
-    burnNft,
-    batchNft,
     batchSft,
     createNft,
     createSft,
     createProject,
-    getAllProjects,
     getCollection,
-    getNftClaimLink,
     getNft,
     getNftByMintAddress,
     getNfts,
@@ -304,12 +257,9 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     getProjects,
     partialUpdateNft,
     partialUpdateProject,
-    revokeNft,
     searchNfts,
     updateNft,
-    updateProjectName,
     updateProject,
-    updateProjectSymbol,
     getTransactions,
     getTransaction,
     getRequest,
