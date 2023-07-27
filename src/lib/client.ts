@@ -3,7 +3,7 @@ import axios from "axios";
 
 export interface UnderdogClient {
   network?: types.NetworkEnum;
-  createNft(request: types.CreateNftRequest): Promise<types.CreateNftResponse>;
+  createNft(request: types.CreateNftRequest): Promise<Promise<Pick<types.CreateTransferableNftResponse, "projectId" | "nftId" | "transactionId">>>;
   createSft(request: types.CreateSftRequest): Promise<types.CreateSftResponse>;
   batchSft(request: types.BatchSftRequest): Promise<void>;
   createProject(request: types.CreateProjectRequest): Promise<types.CreateProjectResponse>;
