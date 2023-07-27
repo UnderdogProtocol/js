@@ -12,7 +12,7 @@ export interface UnderdogClient {
   getNftByMintAddress(request: types.GetNftByMintAddressRequest): Promise<types.GetNftByMintAddressResponse>;
   getNfts(request: types.GetNftsRequest): Promise<types.GetNftsResponse>;
   getProject(request: types.GetProjectRequest): Promise<types.GetProjectResponse>;
-  getProjectStats(request: types.GetProjectStatsRequest): Promise<types.GetProjectStatsResponse>;
+  getProjectStats(requestte: types.GetProjectStatsRequest): Promise<types.GetProjectStatsResponse>;
   getProjects(request: types.GetAllProjectsRequest): Promise<types.GetAllProjectsResponse>;
   partialUpdateNft(request: types.PartialUpdateNftRequest): Promise<types.PartialUpdateNftResponse>;
   partialUpdateProject(request: types.PartialUpdateProjectRequest): Promise<types.PartialUpdateProjectResponse>;
@@ -69,7 +69,7 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
 
   const nftPath = ({ nftId, ...projectParams }: types.NftParams) => `${projectPath(projectParams)}/nfts/${nftId}`;
 
-  const createNft = async ({ params, body }: types.CreateNftRequest): Promise<types.CreateNftResponse> => {
+  const createNft = async ({ params, body }: types.CreateNftRequest): Promise<Pick<types.CreateTransferableNftResponse, "projectId" | "nftId" | "transactionId">> => {
     const response = await instance.post(`${projectPath(params)}/nfts`, body);
     return response.data;
   };
