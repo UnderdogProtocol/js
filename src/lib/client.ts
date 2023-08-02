@@ -74,11 +74,6 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     return response.data;
   };
 
-  const batchNft = async ({ params, body }: types.BatchNftRequest): Promise<void> => {
-    const response = await instance.post(`${projectPath(params)}/nfts/batch`, body);
-    return response.data;
-  };
-
   const createSft = async ({ params, body }: types.CreateSftRequest): Promise<types.CreateSftResponse> => {
     const response = await instance.post(`${projectPath(params)}/sfts`, body);
     return response.data;
