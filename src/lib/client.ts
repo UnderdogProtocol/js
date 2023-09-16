@@ -13,7 +13,7 @@ export interface UnderdogClient {
   getNfts(request: types.GetNftsRequest): Promise<types.GetNftsResponse>;
   getProject(request: types.GetProjectRequest): Promise<types.GetProjectResponse>;
   getProjectStats(requestte: types.GetProjectStatsRequest): Promise<types.GetProjectStatsResponse>;
-  getProjects(request: types.GetAllProjectsRequest): Promise<types.GetAllProjectsResponse>;
+  getProjects(request: types.GetProjectsRequest): Promise<types.GetProjectsResponse>;
   partialUpdateNft(request: types.PartialUpdateNftRequest): Promise<types.PartialUpdateNftResponse>;
   partialUpdateProject(request: types.PartialUpdateProjectRequest): Promise<types.PartialUpdateProjectResponse>;
   searchNfts(request: types.SearchNftsRequest): Promise<types.SearchNftsResponse>;
@@ -89,7 +89,7 @@ export function createUnderdogClient({ network, apiKey, bearer = true, version =
     return response.data;
   };
 
-  const getProjects = async ({ query }: types.GetAllProjectsRequest): Promise<types.GetAllProjectsResponse> => {
+  const getProjects = async ({ query }: types.GetProjectsRequest): Promise<types.GetProjectsResponse> => {
     const response = await instance.get(baseProjectPath, { params: query });
     return response.data;
   };
