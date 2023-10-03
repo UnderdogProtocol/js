@@ -7,11 +7,21 @@ import { createUnderdogClient } from "../../lib";
 
 const defaultUnderdogClient = createUnderdogClient({});
 
+export const useCollections = (request: types.GetCollectionsRequest, underdogClient = defaultUnderdogClient) => {
+  const { data, refetch, isLoading, error } = useQuery<types.GetCollectionsResponse, AxiosError>(
+    ["collection", request, underdogClient.network],
+    () => underdogClient.getCollections(request),
+    { retry: false, enabled: !!request.query.ownerAddress }
+  );
+
+  return { collection: data, loading: isLoading, error, refetch };
+}
+
 export const useCollection = (request: types.GetCollectionRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetCollectionResponse, AxiosError>(
     ["collection", request, underdogClient.network],
     () => underdogClient.getCollection(request),
-    { retry: false }
+    { retry: false, enabled: !!request.params.mintAddress }
   );
 
   return { collection: data, loading: isLoading, error, refetch };
