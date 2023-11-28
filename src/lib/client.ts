@@ -85,6 +85,9 @@ export interface UnderdogClient {
   updateKey(request: types.UpdateKeyRequest): Promise<types.UpdateKeyResponse>;
   deleteKey(request: types.DeleteKeyRequest): Promise<void>;
   getMe(): Promise<types.GetMeResponse>;
+  getDomains(
+    request: types.GetDomainsRequest
+  ): Promise<types.GetDomainsResponse>;
 }
 
 export type UnderdogClientConfig = {
@@ -436,6 +439,14 @@ export function createUnderdogClient({
     return response.data;
   };
 
+  const getDomains = async ({ query }: types.GetDomainsRequest) => {
+    const response = await instance.get(`/${version}/domains`, {
+      params: query,
+    });
+
+    return response.data;
+  };
+
   return {
     network,
     batchSft,
@@ -473,5 +484,6 @@ export function createUnderdogClient({
     updateKey,
     deleteKey,
     getMe,
+    getDomains,
   };
 }
