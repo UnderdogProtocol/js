@@ -350,3 +350,16 @@ export const useDomains = (
 
   return { domains: data, loading: isLoading, error, refetch };
 };
+
+export const useDomain = (
+  request: types.GetDomainRequest,
+  underdogClient = defaultUnderdogClient
+) => {
+  return useQuery<types.GetDomainResponse, AxiosError>(
+    ["domains", request],
+    () => underdogClient.getDomain(request),
+    {
+      retry: false,
+    }
+  );
+};

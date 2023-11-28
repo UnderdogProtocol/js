@@ -88,6 +88,7 @@ export interface UnderdogClient {
   getDomains(
     request: types.GetDomainsRequest
   ): Promise<types.GetDomainsResponse>;
+  getDomain(request: types.GetDomainRequest): Promise<types.GetDomainResponse>;
 }
 
 export type UnderdogClientConfig = {
@@ -447,6 +448,14 @@ export function createUnderdogClient({
     return response.data;
   };
 
+  const getDomain = async ({ params }: types.GetDomainRequest) => {
+    const response = await instance.get(
+      `/${version}/domains/${params.namespace}`
+    );
+
+    return response.data;
+  };
+
   return {
     network,
     batchSft,
@@ -485,5 +494,6 @@ export function createUnderdogClient({
     deleteKey,
     getMe,
     getDomains,
+    getDomain,
   };
 }
