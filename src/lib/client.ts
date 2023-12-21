@@ -12,7 +12,7 @@ export interface UnderdogClient {
     >
   >;
   createSft(request: types.CreateSftRequest): Promise<types.CreateSftResponse>;
-  batchSft(request: types.BatchSftRequest): Promise<void>;
+  batchSft(request: types.BatchSftRequest): Promise<types.BatchSftResponse>;
   batchNft(request: types.BatchNftRequest): Promise<void>;
   createProject(
     request: types.CreateProjectRequest
