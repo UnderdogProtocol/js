@@ -13,6 +13,7 @@ export interface UnderdogClient {
   >;
   createSft(request: types.CreateSftRequest): Promise<types.CreateSftResponse>;
   batchSft(request: types.BatchSftRequest): Promise<void>;
+  batchNft(request: types.BatchNftRequest): Promise<void>;
   createProject(
     request: types.CreateProjectRequest
   ): Promise<types.CreateProjectResponse>;
@@ -145,6 +146,17 @@ export function createUnderdogClient({
     >
   > => {
     const response = await instance.post(`${projectPath(params)}/nfts`, body);
+    return response.data;
+  };
+
+  const batchNft = async ({
+    params,
+    body,
+  }: types.BatchNftRequest): Promise<types.BatchNftResponse> => {
+    const response = await instance.post(
+      `${projectPath(params)}/nfts/batch`,
+      body
+    );
     return response.data;
   };
 
@@ -458,6 +470,7 @@ export function createUnderdogClient({
 
   return {
     network,
+    batchNft,
     batchSft,
     createNft,
     createSft,
