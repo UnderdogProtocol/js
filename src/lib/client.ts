@@ -171,7 +171,7 @@ export function createUnderdogClient({
   const batchSft = async ({
     params,
     body,
-  }: types.BatchSftRequest): Promise<void> => {
+  }: types.BatchSftRequest): Promise<types.BatchSftResponse> => {
     const response = await instance.post(
       `${projectPath(params)}/sfts/batch`,
       body
