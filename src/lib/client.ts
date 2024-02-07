@@ -90,6 +90,9 @@ export interface UnderdogClient {
     request: types.GetDomainsRequest
   ): Promise<types.GetDomainsResponse>;
   getDomain(request: types.GetDomainRequest): Promise<types.GetDomainResponse>;
+  getSnapshots(
+    request: types.GetSnapshotsRequest
+  ): Promise<types.GetSnapshotsResponse>;
 }
 
 export type UnderdogClientConfig = {
@@ -468,6 +471,13 @@ export function createUnderdogClient({
     return response.data;
   };
 
+  const getSnapshots = async ({ query }: types.GetSnapshotsRequest) => {
+    const response = await instance.get(`/${version}/snapshots`, {
+      params: query,
+    });
+    return response.data;
+  };
+
   return {
     network,
     batchNft,
@@ -508,5 +518,6 @@ export function createUnderdogClient({
     getMe,
     getDomains,
     getDomain,
+    getSnapshots,
   };
 }

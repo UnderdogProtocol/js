@@ -363,3 +363,16 @@ export const useDomain = (
     }
   );
 };
+
+export const useSnapshots = (
+  request: types.GetSnapshotsRequest,
+  underdogClient = defaultUnderdogClient
+) => {
+  return useQuery<types.GetSnapshotsResponse, AxiosError>(
+    ["snapshots", request],
+    () => underdogClient.getSnapshots(request),
+    {
+      retry: false,
+    }
+  );
+};
