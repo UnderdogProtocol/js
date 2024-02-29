@@ -1,98 +1,53 @@
-import * as types from "@underdog-protocol/types";
 import axios from "axios";
+
+import * as types from "@underdog-protocol/types";
 
 export interface UnderdogClient {
   network?: types.NetworkEnum;
   createNft(
     request: types.CreateNftRequest
-  ): Promise<
-    Pick<
-      types.CreateTransferableNftResponse,
-      "projectId" | "nftId" | "transactionId"
-    >
-  >;
+  ): Promise<Pick<types.CreateTransferableNftResponse, "projectId" | "nftId" | "transactionId">>;
   createSft(request: types.CreateSftRequest): Promise<types.CreateSftResponse>;
   batchSft(request: types.BatchSftRequest): Promise<types.BatchSftResponse>;
   batchNft(request: types.BatchNftRequest): Promise<types.BatchNftResponse>;
-  createProject(
-    request: types.CreateProjectRequest
-  ): Promise<types.CreateProjectResponse>;
-  getCollections(
-    request: types.GetCollectionsRequest
-  ): Promise<types.GetCollectionsResponse>;
-  getCollection(
-    request: types.GetCollectionRequest
-  ): Promise<types.GetCollectionResponse>;
+  createProject(request: types.CreateProjectRequest): Promise<types.CreateProjectResponse>;
+  getCollections(request: types.GetCollectionsRequest): Promise<types.GetCollectionsResponse>;
+  getCollection(request: types.GetCollectionRequest): Promise<types.GetCollectionResponse>;
   getNft(request: types.GetNftRequest): Promise<types.GetNftResponse>;
-  getNftByMintAddress(
-    request: types.GetNftByMintAddressRequest
-  ): Promise<types.GetNftByMintAddressResponse>;
+  getNftByMintAddress(request: types.GetNftByMintAddressRequest): Promise<types.GetNftByMintAddressResponse>;
   getNfts(request: types.GetNftsRequest): Promise<types.GetNftsResponse>;
-  getProject(
-    request: types.GetProjectRequest
-  ): Promise<types.GetProjectResponse>;
-  getProjectStats(
-    requestte: types.GetProjectStatsRequest
-  ): Promise<types.GetProjectStatsResponse>;
-  getProjects(
-    request: types.GetProjectsRequest
-  ): Promise<types.GetProjectsResponse>;
-  partialUpdateNft(
-    request: types.PartialUpdateNftRequest
-  ): Promise<types.PartialUpdateNftResponse>;
+  getProject(request: types.GetProjectRequest): Promise<types.GetProjectResponse>;
+  getProjectStats(requestte: types.GetProjectStatsRequest): Promise<types.GetProjectStatsResponse>;
+  getProjects(request: types.GetProjectsRequest): Promise<types.GetProjectsResponse>;
+  partialUpdateNft(request: types.PartialUpdateNftRequest): Promise<types.PartialUpdateNftResponse>;
   partialUpdateProject(
     request: types.PartialUpdateProjectRequest
   ): Promise<types.PartialUpdateProjectResponse>;
-  searchNfts(
-    request: types.SearchNftsRequest
-  ): Promise<types.SearchNftsResponse>;
+  searchNfts(request: types.SearchNftsRequest): Promise<types.SearchNftsResponse>;
   updateNft(request: types.UpdateNftRequest): Promise<types.UpdateNftResponse>;
-  updateProject(
-    request: types.UpdateProjectRequest
-  ): Promise<types.UpdateProjectResponse>;
-  getTransactions(
-    request: types.GetTransactionsRequest
-  ): Promise<types.GetTransactionsResponse>;
-  getTransaction(
-    request: types.GetTransactionRequest
-  ): Promise<types.GetTransactionResponse>;
-  getRequests(
-    request: types.GetRequestsRequest
-  ): Promise<types.GetRequestsResponse>;
-  getRequest(
-    request: types.GetRequestRequest
-  ): Promise<types.GetRequestResponse>;
+  updateProject(request: types.UpdateProjectRequest): Promise<types.UpdateProjectResponse>;
+  getTransactions(request: types.GetTransactionsRequest): Promise<types.GetTransactionsResponse>;
+  getTransaction(request: types.GetTransactionRequest): Promise<types.GetTransactionResponse>;
+  getRequests(request: types.GetRequestsRequest): Promise<types.GetRequestsResponse>;
+  getRequest(request: types.GetRequestRequest): Promise<types.GetRequestResponse>;
   getOrgs(request: types.GetOrgsRequest): Promise<types.GetOrgsResponse>;
   getOrg(request: types.GetOrgRequest): Promise<types.GetOrgResponse>;
   updateOrg(request: types.UpdateOrgRequest): Promise<types.UpdateOrgResponse>;
-  createMember(
-    request: types.CreateMemberRequest
-  ): Promise<types.CreateMemberResponse>;
-  getMembers(
-    request: types.GetMembersRequest
-  ): Promise<types.GetMembersResponse>;
-  createWebhook(
-    request: types.CreateWebhookRequest
-  ): Promise<types.CreateWebhookResponse>;
-  getWebhooks(
-    request: types.GetWebhooksRequest
-  ): Promise<types.GetWebhooksResponse>;
-  getWebhook(
-    request: types.GetWebhookRequest
-  ): Promise<types.GetWebhookResponse>;
+  createMember(request: types.CreateMemberRequest): Promise<types.CreateMemberResponse>;
+  getMembers(request: types.GetMembersRequest): Promise<types.GetMembersResponse>;
+  deleteMember(request: types.DeleteMemberRequest): Promise<void>;
+  createWebhook(request: types.CreateWebhookRequest): Promise<types.CreateWebhookResponse>;
+  getWebhooks(request: types.GetWebhooksRequest): Promise<types.GetWebhooksResponse>;
+  getWebhook(request: types.GetWebhookRequest): Promise<types.GetWebhookResponse>;
   deleteWebhook(request: types.DeleteWebhookRequest): Promise<void>;
   createKey(request: types.CreateKeyRequest): Promise<types.CreateKeyResponse>;
   getKeys(request: types.GetKeysRequest): Promise<types.GetKeysResponse>;
   updateKey(request: types.UpdateKeyRequest): Promise<types.UpdateKeyResponse>;
   deleteKey(request: types.DeleteKeyRequest): Promise<void>;
   getMe(): Promise<types.GetMeResponse>;
-  getDomains(
-    request: types.GetDomainsRequest
-  ): Promise<types.GetDomainsResponse>;
+  getDomains(request: types.GetDomainsRequest): Promise<types.GetDomainsResponse>;
   getDomain(request: types.GetDomainRequest): Promise<types.GetDomainResponse>;
-  getSnapshots(
-    request: types.GetSnapshotsRequest
-  ): Promise<types.GetSnapshotsResponse>;
+  getSnapshots(request: types.GetSnapshotsRequest): Promise<types.GetSnapshotsResponse>;
 }
 
 export type UnderdogClientConfig = {
@@ -133,8 +88,7 @@ export function createUnderdogClient({
   });
 
   const baseProjectPath = `/${version}/projects`;
-  const projectPath = ({ projectId }: types.ProjectParams) =>
-    `${baseProjectPath}/${projectId}`;
+  const projectPath = ({ projectId }: types.ProjectParams) => `${baseProjectPath}/${projectId}`;
 
   const nftPath = ({ nftId, ...projectParams }: types.NftParams) =>
     `${projectPath(projectParams)}/nfts/${nftId}`;
@@ -143,42 +97,24 @@ export function createUnderdogClient({
     params,
     body,
   }: types.CreateNftRequest): Promise<
-    Pick<
-      types.CreateTransferableNftResponse,
-      "projectId" | "nftId" | "transactionId"
-    >
+    Pick<types.CreateTransferableNftResponse, "projectId" | "nftId" | "transactionId">
   > => {
     const response = await instance.post(`${projectPath(params)}/nfts`, body);
     return response.data;
   };
 
-  const batchNft = async ({
-    params,
-    body,
-  }: types.BatchNftRequest): Promise<types.BatchNftResponse> => {
-    const response = await instance.post(
-      `${projectPath(params)}/nfts/batch`,
-      body
-    );
+  const batchNft = async ({ params, body }: types.BatchNftRequest): Promise<types.BatchNftResponse> => {
+    const response = await instance.post(`${projectPath(params)}/nfts/batch`, body);
     return response.data;
   };
 
-  const createSft = async ({
-    params,
-    body,
-  }: types.CreateSftRequest): Promise<types.CreateSftResponse> => {
+  const createSft = async ({ params, body }: types.CreateSftRequest): Promise<types.CreateSftResponse> => {
     const response = await instance.post(`${projectPath(params)}/sfts`, body);
     return response.data;
   };
 
-  const batchSft = async ({
-    params,
-    body,
-  }: types.BatchSftRequest): Promise<types.BatchSftResponse> => {
-    const response = await instance.post(
-      `${projectPath(params)}/sfts/batch`,
-      body
-    );
+  const batchSft = async ({ params, body }: types.BatchSftRequest): Promise<types.BatchSftResponse> => {
+    const response = await instance.post(`${projectPath(params)}/sfts/batch`, body);
     return response.data;
   };
 
@@ -189,9 +125,7 @@ export function createUnderdogClient({
     return response.data;
   };
 
-  const getProjects = async ({
-    query,
-  }: types.GetProjectsRequest): Promise<types.GetProjectsResponse> => {
+  const getProjects = async ({ query }: types.GetProjectsRequest): Promise<types.GetProjectsResponse> => {
     const response = await instance.get(baseProjectPath, { params: query });
     return response.data;
   };
@@ -208,15 +142,11 @@ export function createUnderdogClient({
   const getCollection = async ({
     params,
   }: types.GetCollectionRequest): Promise<types.GetCollectionResponse> => {
-    const response = await instance.get(
-      `/${version}/collections/${params.mintAddress}`
-    );
+    const response = await instance.get(`/${version}/collections/${params.mintAddress}`);
     return response.data;
   };
 
-  const getNft = async ({
-    params,
-  }: types.GetNftRequest): Promise<types.GetNftResponse> => {
+  const getNft = async ({ params }: types.GetNftRequest): Promise<types.GetNftResponse> => {
     const response = await instance.get(nftPath(params));
     return response.data;
   };
@@ -224,16 +154,11 @@ export function createUnderdogClient({
   const getNftByMintAddress = async ({
     params,
   }: types.GetNftByMintAddressRequest): Promise<types.GetNftByMintAddressResponse> => {
-    const response = await instance.get(
-      `/${version}/nfts/${params.mintAddress}`
-    );
+    const response = await instance.get(`/${version}/nfts/${params.mintAddress}`);
     return response.data;
   };
 
-  const getNfts = async ({
-    params,
-    query,
-  }: types.GetNftsRequest): Promise<types.GetNftsResponse> => {
+  const getNfts = async ({ params, query }: types.GetNftsRequest): Promise<types.GetNftsResponse> => {
     const response = await instance.get(`${projectPath(params)}/nfts`, {
       params: query,
     });
@@ -281,10 +206,7 @@ export function createUnderdogClient({
     return response.data;
   };
 
-  const updateNft = async ({
-    params,
-    body,
-  }: types.UpdateNftRequest): Promise<types.UpdateNftResponse> => {
+  const updateNft = async ({ params, body }: types.UpdateNftRequest): Promise<types.UpdateNftResponse> => {
     const response = await instance.put(nftPath(params), body);
     return response.data;
   };
@@ -309,52 +231,34 @@ export function createUnderdogClient({
   const getTransaction = async ({
     params,
   }: types.GetTransactionRequest): Promise<types.GetTransactionResponse> => {
-    const response = await instance.get(
-      `/${version}/transactions/${params.transactionId}`
-    );
+    const response = await instance.get(`/${version}/transactions/${params.transactionId}`);
     return response.data;
   };
 
-  const getRequest = async ({
-    params,
-  }: types.GetRequestRequest): Promise<types.GetRequestResponse> => {
-    const response = await instance.get(
-      `/${version}/requests/${params.requestId}`
-    );
+  const getRequest = async ({ params }: types.GetRequestRequest): Promise<types.GetRequestResponse> => {
+    const response = await instance.get(`/${version}/requests/${params.requestId}`);
     return response.data;
   };
 
-  const getRequests = async ({
-    query,
-  }: types.GetRequestsRequest): Promise<types.GetRequestsResponse> => {
+  const getRequests = async ({ query }: types.GetRequestsRequest): Promise<types.GetRequestsResponse> => {
     const response = await instance.get(`/${version}/requests`, {
       params: query,
     });
     return response.data;
   };
 
-  const getOrgs = async ({
-    query,
-  }: types.GetOrgsRequest): Promise<types.GetOrgsResponse> => {
+  const getOrgs = async ({ query }: types.GetOrgsRequest): Promise<types.GetOrgsResponse> => {
     const response = await instance.get(`/${version}/orgs`, { params: query });
     return response.data;
   };
 
-  const getOrg = async ({
-    params,
-  }: types.GetOrgRequest): Promise<types.GetOrgResponse> => {
+  const getOrg = async ({ params }: types.GetOrgRequest): Promise<types.GetOrgResponse> => {
     const response = await instance.get(`/${version}/orgs/${params.orgId}`);
     return response.data;
   };
 
-  const updateOrg = async ({
-    params,
-    body,
-  }: types.UpdateOrgRequest): Promise<types.UpdateOrgResponse> => {
-    const response = await instance.put(
-      `/${version}/orgs/${params.orgId}`,
-      body
-    );
+  const updateOrg = async ({ params, body }: types.UpdateOrgRequest): Promise<types.UpdateOrgResponse> => {
+    const response = await instance.put(`/${version}/orgs/${params.orgId}`, body);
     return response.data;
   };
 
@@ -362,10 +266,7 @@ export function createUnderdogClient({
     params,
     query,
   }: types.GetMembersRequest): Promise<types.GetMembersResponse> => {
-    const response = await instance.get(
-      `/${version}/orgs/${params.orgId}/members`,
-      { params: query }
-    );
+    const response = await instance.get(`/${version}/orgs/${params.orgId}/members`, { params: query });
     return response.data;
   };
 
@@ -373,11 +274,12 @@ export function createUnderdogClient({
     params,
     body,
   }: types.CreateMemberRequest): Promise<types.CreateMemberResponse> => {
-    const response = await instance.post(
-      `/${version}/orgs/${params.orgId}/members`,
-      body
-    );
+    const response = await instance.post(`/${version}/orgs/${params.orgId}/members`, body);
     return response.data;
+  };
+
+  const deleteMember = async ({ params }: types.DeleteMemberRequest): Promise<void> => {
+    await instance.delete(`/${version}/orgs/${params.orgId}/members/${params.walletAddress}`);
   };
 
   const createWebhook = async ({
@@ -387,67 +289,39 @@ export function createUnderdogClient({
     return response.data;
   };
 
-  const getWebhooks = async ({
-    query,
-  }: types.GetWebhooksRequest): Promise<types.GetWebhooksResponse> => {
+  const getWebhooks = async ({ query }: types.GetWebhooksRequest): Promise<types.GetWebhooksResponse> => {
     const response = await instance.get(`/${version}/webhooks`, {
       params: query,
     });
     return response.data;
   };
 
-  const getWebhook = async ({
-    params,
-  }: types.GetWebhookRequest): Promise<types.GetWebhookResponse> => {
-    const response = await instance.get(
-      `/${version}/webhooks/${params.webhookId}`
-    );
+  const getWebhook = async ({ params }: types.GetWebhookRequest): Promise<types.GetWebhookResponse> => {
+    const response = await instance.get(`/${version}/webhooks/${params.webhookId}`);
     return response.data;
   };
 
-  const deleteWebhook = async ({
-    params,
-  }: types.DeleteWebhookRequest): Promise<void> => {
+  const deleteWebhook = async ({ params }: types.DeleteWebhookRequest): Promise<void> => {
     await instance.delete(`/${version}/webhooks/${params.webhookId}`);
   };
 
-  const createKey = async ({
-    params,
-  }: types.CreateKeyRequest): Promise<types.CreateKeyResponse> => {
-    const response = await instance.post(
-      `/${version}/orgs/${params.orgId}/keys`
-    );
+  const createKey = async ({ params }: types.CreateKeyRequest): Promise<types.CreateKeyResponse> => {
+    const response = await instance.post(`/${version}/orgs/${params.orgId}/keys`);
     return response.data;
   };
 
-  const getKeys = async ({
-    query,
-    params,
-  }: types.GetKeysRequest): Promise<types.GetKeysResponse> => {
-    const response = await instance.get(
-      `/${version}/orgs/${params.orgId}/keys`,
-      { params: query }
-    );
+  const getKeys = async ({ query, params }: types.GetKeysRequest): Promise<types.GetKeysResponse> => {
+    const response = await instance.get(`/${version}/orgs/${params.orgId}/keys`, { params: query });
     return response.data;
   };
 
-  const updateKey = async ({
-    params,
-    body,
-  }: types.UpdateKeyRequest): Promise<types.UpdateKeyResponse> => {
-    const response = await instance.put(
-      `/${version}/orgs/${params.orgId}/keys/${params.prefix}`,
-      body
-    );
+  const updateKey = async ({ params, body }: types.UpdateKeyRequest): Promise<types.UpdateKeyResponse> => {
+    const response = await instance.put(`/${version}/orgs/${params.orgId}/keys/${params.prefix}`, body);
     return response.data;
   };
 
-  const deleteKey = async ({
-    params,
-  }: types.DeleteKeyRequest): Promise<void> => {
-    await instance.delete(
-      `/${version}/orgs/${params.orgId}/keys/${params.prefix}`
-    );
+  const deleteKey = async ({ params }: types.DeleteKeyRequest): Promise<void> => {
+    await instance.delete(`/${version}/orgs/${params.orgId}/keys/${params.prefix}`);
   };
 
   const getMe = async (): Promise<types.GetMeResponse> => {
@@ -464,9 +338,7 @@ export function createUnderdogClient({
   };
 
   const getDomain = async ({ params }: types.GetDomainRequest) => {
-    const response = await instance.get(
-      `/${version}/domains/${params.namespace}`
-    );
+    const response = await instance.get(`/${version}/domains/${params.namespace}`);
 
     return response.data;
   };
@@ -506,6 +378,7 @@ export function createUnderdogClient({
     getOrg,
     updateOrg,
     getMembers,
+    deleteMember,
     createMember,
     createWebhook,
     getWebhooks,
