@@ -35,6 +35,7 @@ export interface UnderdogClient {
   updateOrg(request: types.UpdateOrgRequest): Promise<types.UpdateOrgResponse>;
   createMember(request: types.CreateMemberRequest): Promise<types.CreateMemberResponse>;
   getMembers(request: types.GetMembersRequest): Promise<types.GetMembersResponse>;
+  updateMember(request: types.UpdateMemberRequest): Promise<types.UpdateMemberResponse>;
   deleteMember(request: types.DeleteMemberRequest): Promise<void>;
   createWebhook(request: types.CreateWebhookRequest): Promise<types.CreateWebhookResponse>;
   getWebhooks(request: types.GetWebhooksRequest): Promise<types.GetWebhooksResponse>;
@@ -278,6 +279,17 @@ export function createUnderdogClient({
     return response.data;
   };
 
+  const updateMember = async ({
+    params,
+    body,
+  }: types.UpdateMemberRequest): Promise<types.UpdateMemberResponse> => {
+    const response = await instance.put(
+      `/${version}/orgs/${params.orgId}/members/${params.walletAddress}`,
+      body
+    );
+    return response.data;
+  };
+
   const deleteMember = async ({ params }: types.DeleteMemberRequest): Promise<void> => {
     await instance.delete(`/${version}/orgs/${params.orgId}/members/${params.walletAddress}`);
   };
@@ -378,6 +390,7 @@ export function createUnderdogClient({
     getOrg,
     updateOrg,
     getMembers,
+    updateMember,
     deleteMember,
     createMember,
     createWebhook,
