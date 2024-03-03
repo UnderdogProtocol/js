@@ -48,6 +48,7 @@ export interface UnderdogClient {
   getMe(): Promise<types.GetMeResponse>;
   getDomains(request: types.GetDomainsRequest): Promise<types.GetDomainsResponse>;
   getDomain(request: types.GetDomainRequest): Promise<types.GetDomainResponse>;
+  createSnapshot(request: types.CreateSnapshotRequest): Promise<types.CreateSnapshotResponse>;
   getSnapshots(request: types.GetSnapshotsRequest): Promise<types.GetSnapshotsResponse>;
 }
 
@@ -355,6 +356,11 @@ export function createUnderdogClient({
     return response.data;
   };
 
+  const createSnapshot = async ({ body }: types.CreateSnapshotRequest) => {
+    const response = await instance.post(`/${version}/snapshots`, body);
+    return response.data;
+  };
+
   const getSnapshots = async ({ query }: types.GetSnapshotsRequest) => {
     const response = await instance.get(`/${version}/snapshots`, {
       params: query,
@@ -404,6 +410,7 @@ export function createUnderdogClient({
     getMe,
     getDomains,
     getDomain,
+    createSnapshot,
     getSnapshots,
   };
 }
