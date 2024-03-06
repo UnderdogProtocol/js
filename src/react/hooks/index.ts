@@ -236,7 +236,7 @@ export const useMe = (underdogClient = defaultUnderdogClient) => {
 
 export const useDomains = (request: types.GetDomainsRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetDomainsResponse, AxiosError>(
-    ["domains", request],
+    ["domains", request, underdogClient.network],
     () => underdogClient.getDomains(request),
     {
       retry: false,
@@ -248,7 +248,7 @@ export const useDomains = (request: types.GetDomainsRequest, underdogClient = de
 
 export const useDomain = (request: types.GetDomainRequest, underdogClient = defaultUnderdogClient) => {
   return useQuery<types.GetDomainResponse, AxiosError>(
-    ["domains", request],
+    ["domains", request, underdogClient.network],
     () => underdogClient.getDomain(request),
     {
       retry: false,
@@ -258,7 +258,7 @@ export const useDomain = (request: types.GetDomainRequest, underdogClient = defa
 
 export const useSnapshots = (request: types.GetSnapshotsRequest, underdogClient = defaultUnderdogClient) => {
   return useQuery<types.GetSnapshotsResponse, AxiosError>(
-    ["snapshots", request],
+    ["snapshots", request, underdogClient.network],
     () => underdogClient.getSnapshots(request),
     {
       retry: false,
@@ -268,7 +268,7 @@ export const useSnapshots = (request: types.GetSnapshotsRequest, underdogClient 
 
 export const useSnapshot = (request: types.GetSnapshotRequest, underdogClient = defaultUnderdogClient) => {
   return useQuery<types.GetSnapshotResponse, AxiosError>(
-    ["snapshot", request],
+    ["snapshot", request, underdogClient.network],
     () => underdogClient.getSnapshot(request),
     { retry: false, enabled: z.string().uuid().safeParse(request.params.snapshotId).success }
   );
