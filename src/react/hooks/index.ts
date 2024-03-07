@@ -276,6 +276,10 @@ export const useSnapshot = (request: types.GetSnapshotRequest, underdogClient = 
   return useQuery<types.GetSnapshotResponse, AxiosError>(
     ["snapshot", request, underdogClient.network],
     () => underdogClient.getSnapshot(request),
-    { retry: false, enabled: z.string().uuid().safeParse(request.params.snapshotId).success }
+    {
+      retry: false,
+      enabled: z.string().uuid().safeParse(request.params.snapshotId).success,
+      refetchInterval: (data) => (data?.url ? false : 2000),
+    }
   );
 };
