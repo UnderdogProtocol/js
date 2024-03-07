@@ -1,5 +1,6 @@
 import { UseQueryOptions, useQuery } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import { useMemo } from "react";
 import { z } from "zod";
 
 import * as types from "@underdog-protocol/types";
@@ -7,6 +8,11 @@ import * as types from "@underdog-protocol/types";
 import { createUnderdogClient } from "../../lib";
 
 const defaultUnderdogClient = createUnderdogClient({});
+
+export const useUnderdogClient = () => {
+  const underdogClient = useMemo(() => createUnderdogClient({}), []);
+  return underdogClient;
+};
 
 export const useCollections = (
   request: types.GetCollectionsRequest,
