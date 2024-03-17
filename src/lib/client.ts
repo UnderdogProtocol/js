@@ -51,6 +51,7 @@ export interface UnderdogClient {
   createSnapshot(request: types.CreateSnapshotRequest): Promise<types.CreateSnapshotResponse>;
   getSnapshots(request: types.GetSnapshotsRequest): Promise<types.GetSnapshotsResponse>;
   getSnapshot(request: types.GetSnapshotRequest): Promise<types.GetSnapshotResponse>;
+  deleteSnapshot(request: types.DeleteSnapshotRequest): Promise<void>;
 }
 
 export type UnderdogClientConfig = {
@@ -374,6 +375,10 @@ export function createUnderdogClient({
     return response.data;
   };
 
+  const deleteSnapshot = async ({ params }: types.DeleteSnapshotRequest) => {
+    await instance.delete(`/${version}/snapshots/${params.snapshotId}`);
+  };
+
   return {
     network,
     batchNft,
@@ -419,5 +424,6 @@ export function createUnderdogClient({
     createSnapshot,
     getSnapshots,
     getSnapshot,
+    deleteSnapshot,
   };
 }
