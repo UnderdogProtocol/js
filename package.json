@@ -1,6 +1,6 @@
 {
   "name": "@underdog-protocol/js",
-  "version": "0.6.31",
+  "version": "0.6.32",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
