@@ -33,6 +33,7 @@ export interface UnderdogClient {
   getOrgs(request: types.GetOrgsRequest): Promise<types.GetOrgsResponse>;
   getOrg(request: types.GetOrgRequest): Promise<types.GetOrgResponse>;
   updateOrg(request: types.UpdateOrgRequest): Promise<types.UpdateOrgResponse>;
+  partialUpdateOrg(request: types.PartialUpdateOrgRequest): Promise<types.UpdateOrgResponse>;
   createMember(request: types.CreateMemberRequest): Promise<types.CreateMemberResponse>;
   getMembers(request: types.GetMembersRequest): Promise<types.GetMembersResponse>;
   updateMember(request: types.UpdateMemberRequest): Promise<types.UpdateMemberResponse>;
@@ -266,6 +267,14 @@ export function createUnderdogClient({
     return response.data;
   };
 
+  const partialUpdateOrg = async ({
+    params,
+    body,
+  }: types.PartialUpdateOrgRequest): Promise<types.UpdateOrgResponse> => {
+    const response = await instance.patch(`/${version}/orgs/${params.orgId}`, body);
+    return response.data;
+  };
+
   const getMembers = async ({
     params,
     query,
@@ -406,6 +415,7 @@ export function createUnderdogClient({
     getOrgs,
     getOrg,
     updateOrg,
+    partialUpdateOrg,
     getMembers,
     updateMember,
     deleteMember,
