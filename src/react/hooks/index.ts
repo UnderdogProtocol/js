@@ -283,3 +283,11 @@ export const useSnapshot = (request: types.GetSnapshotRequest, underdogClient = 
     }
   );
 };
+
+export const useTrees = (request: types.GetTreesRequest, underdogClient = defaultUnderdogClient) => {
+  return useQuery<types.GetTreesResponse, AxiosError>(
+    ["trees", request, underdogClient.network],
+    () => underdogClient.getTrees(request),
+    { retry: false }
+  );
+};

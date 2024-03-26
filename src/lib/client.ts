@@ -53,6 +53,9 @@ export interface UnderdogClient {
   getSnapshots(request: types.GetSnapshotsRequest): Promise<types.GetSnapshotsResponse>;
   getSnapshot(request: types.GetSnapshotRequest): Promise<types.GetSnapshotResponse>;
   deleteSnapshot(request: types.DeleteSnapshotRequest): Promise<void>;
+
+  createTree(request: types.CreateTreeRequest): Promise<types.CreateTreeResponse>;
+  getTrees(request: types.GetTreesRequest): Promise<types.GetTreesResponse>;
 }
 
 export type UnderdogClientConfig = {
@@ -388,6 +391,16 @@ export function createUnderdogClient({
     await instance.delete(`/${version}/snapshots/${params.snapshotId}`);
   };
 
+  const createTree = async ({ body }: types.CreateTreeRequest) => {
+    const response = await instance.post(`/${version}/trees`, body);
+    return response.data;
+  };
+
+  const getTrees = async ({ query }: types.GetTreesRequest) => {
+    const response = await instance.get(`/${version}/trees`, { params: query });
+    return response.data;
+  };
+
   return {
     network,
     batchNft,
@@ -435,5 +448,7 @@ export function createUnderdogClient({
     getSnapshots,
     getSnapshot,
     deleteSnapshot,
+    createTree,
+    getTrees,
   };
 }
