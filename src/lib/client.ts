@@ -19,6 +19,9 @@ export interface UnderdogClient {
   getProject(request: types.GetProjectRequest): Promise<types.GetProjectResponse>;
   getProjectStats(requestte: types.GetProjectStatsRequest): Promise<types.GetProjectStatsResponse>;
   getProjects(request: types.GetProjectsRequest): Promise<types.GetProjectsResponse>;
+  searchProjects(request: {
+    query: types.SearchProjectsRequest["query"] & { query: string };
+  }): Promise<types.SearchProjectsResponse>;
   partialUpdateNft(request: types.PartialUpdateNftRequest): Promise<types.PartialUpdateNftResponse>;
   partialUpdateProject(
     request: types.PartialUpdateProjectRequest
@@ -138,6 +141,13 @@ export function createUnderdogClient({
     return response.data;
   };
 
+  const searchProjects = async ({
+    query,
+  }: types.SearchProjectsRequest): Promise<types.SearchProjectsResponse> => {
+    const response = await instance.get(baseProjectPath, { params: query });
+    return response.data;
+  };
+
   const getCollections = async ({
     query,
   }: types.GetCollectionsRequest): Promise<types.GetCollectionsResponse> => {
@@ -149,8 +159,9 @@ export function createUnderdogClient({
 
   const getCollection = async ({
     params,
+    query,
   }: types.GetCollectionRequest): Promise<types.GetCollectionResponse> => {
-    const response = await instance.get(`/${version}/collections/${params.mintAddress}`);
+    const response = await instance.get(`/${version}/collections/${params.mintAddress}`, { params: query });
     return response.data;
   };
 
@@ -416,6 +427,7 @@ export function createUnderdogClient({
     getProject,
     getProjectStats,
     getProjects,
+    searchProjects,
     partialUpdateNft,
     partialUpdateProject,
     searchNfts,
