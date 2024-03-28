@@ -109,13 +109,11 @@ export const useSearchProjects = (
   request: types.SearchProjectsRequest,
   underdogClient = defaultUnderdogClient
 ) => {
-  const { data, refetch, isLoading, error } = useQuery<types.SearchNftsResponse, AxiosError>(
-    ["searchNfts", request, underdogClient.network],
+  return useQuery<types.SearchNftsResponse, AxiosError>(
+    ["searchProjects", request, underdogClient.network],
     () => underdogClient.searchProjects(request),
-    { retry: false }
+    { retry: false, enabled: types.searchQuerySchema.safeParse(request.query.query).success }
   );
-
-  return { nfts: data, loading: isLoading, error, refetch };
 };
 
 export const useSearchNfts = (request: types.SearchNftsRequest, underdogClient = defaultUnderdogClient) => {
