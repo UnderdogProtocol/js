@@ -109,7 +109,7 @@ export const useSearchProjects = (
   request: types.SearchProjectsRequest,
   underdogClient = defaultUnderdogClient
 ) => {
-  return useQuery<types.SearchNftsResponse, AxiosError>(
+  return useQuery<types.SearchProjectsResponse, AxiosError>(
     ["searchProjects", request, underdogClient.network],
     () => underdogClient.searchProjects(request),
     { retry: false, enabled: types.searchQuerySchema.safeParse(request.query.query).success }
