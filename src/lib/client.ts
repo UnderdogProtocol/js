@@ -17,16 +17,16 @@ export interface UnderdogClient {
   getNftByMintAddress(request: types.GetNftByMintAddressRequest): Promise<types.GetNftByMintAddressResponse>;
   getNfts(request: types.GetNftsRequest): Promise<types.GetNftsResponse>;
   getProject(request: types.GetProjectRequest): Promise<types.GetProjectResponse>;
+  updateProject(request: types.UpdateProjectRequest): Promise<types.UpdateProjectResponse>;
+  partialUpdateProject(
+    request: types.PartialUpdateProjectRequest
+  ): Promise<types.PartialUpdateProjectResponse>;
   getProjectStats(requestte: types.GetProjectStatsRequest): Promise<types.GetProjectStatsResponse>;
   getProjects(request: types.GetProjectsRequest): Promise<types.GetProjectsResponse>;
   searchProjects(request: types.SearchProjectsRequest): Promise<types.SearchProjectsResponse>;
   partialUpdateNft(request: types.PartialUpdateNftRequest): Promise<types.PartialUpdateNftResponse>;
-  partialUpdateProject(
-    request: types.PartialUpdateProjectRequest
-  ): Promise<types.PartialUpdateProjectResponse>;
   searchNfts(request: types.SearchNftsRequest): Promise<types.SearchNftsResponse>;
   updateNft(request: types.UpdateNftRequest): Promise<types.UpdateNftResponse>;
-  updateProject(request: types.UpdateProjectRequest): Promise<types.UpdateProjectResponse>;
   getTransactions(request: types.GetTransactionsRequest): Promise<types.GetTransactionsResponse>;
   getTransaction(request: types.GetTransactionRequest): Promise<types.GetTransactionResponse>;
   getRequests(request: types.GetRequestsRequest): Promise<types.GetRequestsResponse>;
