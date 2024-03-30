@@ -425,13 +425,14 @@
     "@types/node" "*"
 
 "@underdog-protocol/types@^1.0.0":
-  version "1.1.65"
-  resolved "https://registry.yarnpkg.com/@underdog-protocol/types/-/types-1.1.65.tgz#b8f241b2a57dd29240534eef93276fb7d1c99ad1"
-  integrity sha512-hvnaEdk6hJ6x6UIwoNin4m+LYbma5z2/TGd+HkWDnrIiK6a1elBcZfh0nZxLI7OZFJk1Zbfmb0uN6C/kRsNcRA==
+  version "1.1.73"
+  resolved "https://registry.yarnpkg.com/@underdog-protocol/types/-/types-1.1.73.tgz#373fabce5a0cedb9e6a0831a46062cf4ecfdb71e"
+  integrity sha512-dRN7y0dGoth0qYVfpQbAlzh2c8T5xj4WUaoxQghTgPiTJ4DR8jMeH+x61OTzWWXPN+hiUVO9r1fPRlzgGk/EHA==
   dependencies:
     "@asteasolutions/zod-to-openapi" "^4.6.0"
     "@metaplex-foundation/umi" "^0.8.10"
     "@solana/web3.js" "^1.87.0"
+    pegjs "^0.10.0"
     zod "^3.22.4"
 
 JSONStream@^1.3.5:
@@ -1186,6 +1187,11 @@ path-type@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
+
+pegjs@^0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/pegjs/-/pegjs-0.10.0.tgz#cf8bafae6eddff4b5a7efb185269eaaf4610ddbd"
+  integrity sha512-qI5+oFNEGi3L5HAxDwN2LA4Gg7irF70Zs25edhjld9QemOgp0CbvMtbFcMvFtEo1OityPrcCzkQFB8JP/hxgow==
 
 picocolors@^1.0.0:
   version "1.0.0"
