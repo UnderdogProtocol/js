@@ -52,8 +52,7 @@ export const useNftByMintAddress = (
 ) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetNftByMintAddressResponse, AxiosError>(
     ["nftByMintAddress", request, underdogClient.network],
-    () => underdogClient.getNftByMintAddress(request),
-    { retry: false }
+    () => underdogClient.getNftByMintAddress(request)
   );
 
   return { nft: data, loading: isLoading, error, refetch };
