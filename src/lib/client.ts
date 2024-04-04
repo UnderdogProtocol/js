@@ -4,9 +4,12 @@ import * as types from "@underdog-protocol/types";
 
 export interface UnderdogClient {
   network?: types.NetworkEnum;
+
   createNft(
     request: types.CreateNftRequest
   ): Promise<Pick<types.CreateTransferableNftResponse, "projectId" | "nftId" | "transactionId">>;
+  lazyCreateNft(request: types.CreateNftRequest): Promise<types.Nft>;
+
   createSft(request: types.CreateSftRequest): Promise<types.CreateSftResponse>;
   batchSft(request: types.BatchSftRequest): Promise<types.BatchSftResponse>;
   batchNft(request: types.BatchNftRequest): Promise<types.BatchNftResponse>;
@@ -114,6 +117,11 @@ export function createUnderdogClient({
     Pick<types.CreateTransferableNftResponse, "projectId" | "nftId" | "transactionId">
   > => {
     const response = await instance.post(`${projectPath(params)}/nfts`, body);
+    return response.data;
+  };
+
+  const lazyCreateNft = async ({ params, body }: types.CreateNftRequest): Promise<types.Nft> => {
+    const response = await instance.post(`${projectPath(params)}/nfts/lazy`, body);
     return response.data;
   };
 
@@ -428,6 +436,7 @@ export function createUnderdogClient({
     batchNft,
     batchSft,
     createNft,
+    lazyCreateNft,
     createSft,
     createProject,
 
