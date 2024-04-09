@@ -36,6 +36,17 @@ export const useCollection = (
   );
 };
 
+export const useCollectionNfts = (
+  request: types.GetCollectionNftsRequest,
+  underdogClient = defaultUnderdogClient
+) => {
+  return useQuery<types.GetCollectionNftsResponse, AxiosError>(
+    ["collection", "nfts", request, underdogClient.network],
+    () => underdogClient.getCollectionNfts(request),
+    { enabled: !!request.params.mintAddress }
+  );
+};
+
 export const useNft = (request: types.GetNftRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetNftResponse, AxiosError>(
     ["nft", request, underdogClient.network],
@@ -50,12 +61,10 @@ export const useNftByMintAddress = (
   request: types.GetNftByMintAddressRequest,
   underdogClient = defaultUnderdogClient
 ) => {
-  const { data, refetch, isLoading, error } = useQuery<types.GetNftByMintAddressResponse, AxiosError>(
+  return useQuery<types.GetNftByMintAddressResponse, AxiosError>(
     ["nftByMintAddress", request, underdogClient.network],
     () => underdogClient.getNftByMintAddress(request)
   );
-
-  return { nft: data, loading: isLoading, error, refetch };
 };
 
 export const useNfts = (request: types.GetNftsRequest, underdogClient = defaultUnderdogClient) => {

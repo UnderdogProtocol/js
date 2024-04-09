@@ -17,6 +17,7 @@ export interface UnderdogClient {
 
   getCollections(request: types.GetCollectionsRequest): Promise<types.GetCollectionsResponse>;
   getCollection(request: types.GetCollectionRequest): Promise<types.GetCollectionResponse>;
+  getCollectionNfts(request: types.GetCollectionNftsRequest): Promise<types.GetCollectionNftsResponse>;
   createCollectionClaimTransaction(
     request: types.CreateCollectionClaimTransactionRequest
   ): Promise<types.CreateCollectionClaimTransactionResponse>;
@@ -170,9 +171,18 @@ export function createUnderdogClient({
 
   const getCollection = async ({
     params,
-    query,
   }: types.GetCollectionRequest): Promise<types.GetCollectionResponse> => {
-    const response = await instance.get(`/${version}/collections/${params.mintAddress}`, { params: query });
+    const response = await instance.get(`/${version}/collections/${params.mintAddress}`);
+    return response.data;
+  };
+
+  const getCollectionNfts = async ({
+    params,
+    query,
+  }: types.GetCollectionNftsRequest): Promise<types.GetCollectionNftsResponse> => {
+    const response = await instance.get(`/${version}/collections/${params.mintAddress}/nfts`, {
+      params: query,
+    });
     return response.data;
   };
 
@@ -442,6 +452,7 @@ export function createUnderdogClient({
 
     getCollections,
     getCollection,
+    getCollectionNfts,
     createCollectionClaimTransaction,
 
     getNft,
