@@ -22,6 +22,10 @@ export interface UnderdogClient {
     request: types.CreateCollectionClaimTransactionRequest
   ): Promise<types.CreateCollectionClaimTransactionResponse>;
 
+  createNftClaimTransaction(
+    request: types.CreateNftClaimTransactionRequest
+  ): Promise<types.CreateNftClaimTransactionResponse>;
+
   getNft(request: types.GetNftRequest): Promise<types.GetNftResponse>;
   getNftByMintAddress(request: types.GetNftByMintAddressRequest): Promise<types.GetNftByMintAddressResponse>;
   getNfts(request: types.GetNftsRequest): Promise<types.GetNftsResponse>;
@@ -191,6 +195,11 @@ export function createUnderdogClient({
     body,
   }: types.CreateCollectionClaimTransactionRequest) => {
     const response = await instance.post(`/${version}/collections/${params.mintAddress}/claim`, body);
+    return response.data;
+  };
+
+  const createNftClaimTransaction = async ({ params, body }: types.CreateNftClaimTransactionRequest) => {
+    const response = await instance.post(`/${version}/nfts/${params.mintAddress}/claim`, body);
     return response.data;
   };
 
@@ -455,9 +464,12 @@ export function createUnderdogClient({
     getCollectionNfts,
     createCollectionClaimTransaction,
 
+    createNftClaimTransaction,
+
     getNft,
     getNftByMintAddress,
     getNfts,
+
     getProject,
     getProjectStats,
     getProjects,
