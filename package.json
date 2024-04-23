@@ -10,6 +10,7 @@
   ],
   "scripts": {
     "build": "tsup",
+    "clean": "rm -rf dist node_modules yarn.lock",
     "dx": "yarn build --watch",
     "lint": "eslint . --ext .ts,.js,.tsx,.jsx",
     "lint:fix": "eslint . --ext .ts,.js,.tsx,.jsx --fix"
