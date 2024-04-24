@@ -253,7 +253,7 @@ export function createUnderdogClient({
   const partialUpdateNft = async ({
     body,
     params,
-  }: types.PartialUpdateNftRequest): Promise<types.PartialUpdateNftResponse> => {
+  }: types.PartialUpdateAssetRequest): Promise<types.PartialUpdateAssetResponse> => {
     const response = await instance.patch(nftPath(params), body);
     return response.data;
   };
@@ -276,7 +276,10 @@ export function createUnderdogClient({
     return response.data;
   };
 
-  const updateNft = async ({ params, body }: types.UpdateNftRequest): Promise<types.UpdateNftResponse> => {
+  const updateNft = async ({
+    params,
+    body,
+  }: types.UpdateAssetRequest): Promise<types.UpdateAssetResponse> => {
     const response = await instance.put(nftPath(params), body);
     return response.data;
   };
