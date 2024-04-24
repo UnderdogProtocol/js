@@ -42,9 +42,9 @@ export interface UnderdogClient {
   getProjectStats(requestte: types.GetProjectStatsRequest): Promise<types.GetProjectStatsResponse>;
   getProjects(request: types.GetProjectsRequest): Promise<types.GetProjectsResponse>;
   searchProjects(request: types.SearchProjectsRequest): Promise<types.SearchProjectsResponse>;
-  partialUpdateNft(request: types.PartialUpdateNftRequest): Promise<types.PartialUpdateNftResponse>;
+  partialUpdateNft(request: types.PartialUpdateAssetRequest): Promise<types.PartialUpdateAssetResponse>;
   searchNfts(request: types.SearchNftsRequest): Promise<types.SearchNftsResponse>;
-  updateNft(request: types.UpdateNftRequest): Promise<types.UpdateNftResponse>;
+  updateNft(request: types.UpdateAssetRequest): Promise<types.UpdateAssetResponse>;
   getTransactions(request: types.GetTransactionsRequest): Promise<types.GetTransactionsResponse>;
   getTransaction(request: types.GetTransactionRequest): Promise<types.GetTransactionResponse>;
   getRequests(request: types.GetRequestsRequest): Promise<types.GetRequestsResponse>;
