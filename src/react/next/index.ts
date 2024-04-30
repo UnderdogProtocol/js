@@ -1,7 +1,8 @@
-import { networkToUnderdogApiEndpoints, NetworkEnum } from "@underdog-protocol/types";
 import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 import path from "path";
+
+import { networkToUnderdogApiEndpoints, NetworkEnum } from "@underdog-protocol/types";
 
 export interface UnderdogOptions {
   apiKey: string;
