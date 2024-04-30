@@ -425,9 +425,9 @@
     "@types/node" "*"
 
 "@underdog-protocol/types@^1.0.0":
-  version "1.1.88"
-  resolved "https://registry.yarnpkg.com/@underdog-protocol/types/-/types-1.1.88.tgz#8b0b2c40661bd94a1de2a5c067429e070fb9c96a"
-  integrity sha512-7wVUQr89Q3tmbxozinxRttv6VvKaynocFJwcQ7TUKqxuIt1BFk2ZMq88afjGieA2WxrRoelmqB8En2WNObZVtg==
+  version "1.1.89"
+  resolved "https://registry.yarnpkg.com/@underdog-protocol/types/-/types-1.1.89.tgz#130458fcb6c4378581ca31cfe300f9806097aa50"
+  integrity sha512-5NzztRUkHJVwKgrhKZ34gRuw//JkWBEp5SlYWUXDXoR8QaGSxztzMSRbcrXMMZFildi6NQOG9QQOFwYpMsN7jA==
   dependencies:
     "@asteasolutions/zod-to-openapi" "^4.6.0"
     "@metaplex-foundation/umi" "^0.8.10"
