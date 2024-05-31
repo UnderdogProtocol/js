@@ -79,7 +79,7 @@ export const useProject = (request: types.GetProjectRequest, underdogClient = de
     () => underdogClient.getProject(request),
     {
       retry: false,
-      refetchInterval: (data) => (data?.status === "processing" || data?.status === "pending" ? 1000 : false),
+      refetchInterval: (data) => (data?.status !== types.StatusEnum.Confirmed ? 1000 : false),
     }
   );
 };
