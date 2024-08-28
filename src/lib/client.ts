@@ -72,10 +72,13 @@ export interface UnderdogClient {
   getMe(): Promise<types.GetMeResponse>;
   getDomains(request: types.GetDomainsRequest): Promise<types.GetDomainsResponse>;
   getDomain(request: types.GetDomainRequest): Promise<types.GetDomainResponse>;
+
   createSnapshot(request: types.CreateSnapshotRequest): Promise<types.CreateSnapshotResponse>;
   getSnapshots(request: types.GetSnapshotsRequest): Promise<types.GetSnapshotsResponse>;
   getSnapshot(request: types.GetSnapshotRequest): Promise<types.GetSnapshotResponse>;
   deleteSnapshot(request: types.DeleteSnapshotRequest): Promise<void>;
+
+  createFile(request: types.CreateFileRequest): Promise<types.CreateFileResponse>;
 
   createTree(request: types.CreateTreeRequest): Promise<types.CreateTreeResponse>;
   getTrees(request: types.GetTreesRequest): Promise<types.GetTreesResponse>;
@@ -465,6 +468,11 @@ export function createUnderdogClient({
     await instance.delete(`/${version}/snapshots/${params.snapshotId}`);
   };
 
+  const createFile = async ({ body }: types.CreateFileRequest) => {
+    const response = await instance.post(`/${version}/files`, body);
+    return response.data;
+  };
+
   const createTree = async ({ body }: types.CreateTreeRequest) => {
     const response = await instance.post(`/${version}/trees`, body);
     return response.data;
@@ -536,5 +544,7 @@ export function createUnderdogClient({
     deleteSnapshot,
     createTree,
     getTrees,
+
+    createFile,
   };
 }
