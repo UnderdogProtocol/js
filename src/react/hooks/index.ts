@@ -275,6 +275,14 @@ export const useSnapshots = (request: types.GetSnapshotsRequest, underdogClient 
   );
 };
 
+export const useFiles = (request: types.GetFilesRequest, underdogClient = defaultUnderdogClient) => {
+  return useQuery<types.GetFilesResponse, AxiosError>(
+    ["files", request, underdogClient.network],
+    () => underdogClient.getFiles(request),
+    { retry: false }
+  );
+};
+
 export const useSnapshot = (request: types.GetSnapshotRequest, underdogClient = defaultUnderdogClient) => {
   return useQuery<types.GetSnapshotResponse, AxiosError>(
     ["snapshot", request, underdogClient.network],
