@@ -51,8 +51,6 @@ export interface UnderdogClient {
   updateNft(request: types.UpdateAssetRequest): Promise<types.UpdateAssetResponse>;
   getTransactions(request: types.GetTransactionsRequest): Promise<types.GetTransactionsResponse>;
   getTransaction(request: types.GetTransactionRequest): Promise<types.GetTransactionResponse>;
-  getRequests(request: types.GetRequestsRequest): Promise<types.GetRequestsResponse>;
-  getRequest(request: types.GetRequestRequest): Promise<types.GetRequestResponse>;
   getOrgs(request: types.GetOrgsRequest): Promise<types.GetOrgsResponse>;
   getOrg(request: types.GetOrgRequest): Promise<types.GetOrgResponse>;
   updateOrg(request: types.UpdateOrgRequest): Promise<types.UpdateOrgResponse>;
@@ -318,18 +316,6 @@ export function createUnderdogClient({
     params,
   }: types.GetTransactionRequest): Promise<types.GetTransactionResponse> => {
     const response = await instance.get(`/${version}/transactions/${params.transactionId}`);
-    return response.data;
-  };
-
-  const getRequest = async ({ params }: types.GetRequestRequest): Promise<types.GetRequestResponse> => {
-    const response = await instance.get(`/${version}/requests/${params.requestId}`);
-    return response.data;
-  };
-
-  const getRequests = async ({ query }: types.GetRequestsRequest): Promise<types.GetRequestsResponse> => {
-    const response = await instance.get(`/${version}/requests`, {
-      params: query,
-    });
     return response.data;
   };
 

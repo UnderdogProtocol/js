@@ -151,26 +151,6 @@ export const useTransactions = (
   return { transactions: data, loading: isLoading, error, refetch };
 };
 
-export const useRequest = (request: types.GetRequestRequest, underdogClient = defaultUnderdogClient) => {
-  const { data, refetch, isLoading, error } = useQuery<types.GetRequestResponse, AxiosError>(
-    ["request", request, underdogClient.network],
-    () => underdogClient.getRequest(request),
-    { retry: false }
-  );
-
-  return { request: data, loading: isLoading, error, refetch };
-};
-
-export const useRequests = (request: types.GetRequestsRequest, underdogClient = defaultUnderdogClient) => {
-  const { data, refetch, isLoading, error } = useQuery<types.GetRequestsResponse, AxiosError>(
-    ["requests", request, underdogClient.network],
-    () => underdogClient.getRequests(request),
-    { retry: false }
-  );
-
-  return { requests: data, loading: isLoading, error, refetch };
-};
-
 export const useOrg = (request: types.GetOrgRequest, underdogClient = defaultUnderdogClient) => {
   const { data, refetch, isLoading, error } = useQuery<types.GetOrgResponse, AxiosError>(
     ["org", request, underdogClient.network],
