@@ -509,8 +509,6 @@ export function createUnderdogClient({
     updateProject,
     getTransactions,
     getTransaction,
-    getRequest,
-    getRequests,
     getOrgs,
     getOrg,
     updateOrg,
